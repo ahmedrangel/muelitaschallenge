@@ -34,7 +34,7 @@ const participants = [
     lol_picture: 1230,
     is_ingame: false,
     tier: null,
-    twitter: "Yizack"
+    twitter: "Yizackr"
   },
   {
     twitch_login: "thewizardragon",
@@ -52,6 +52,24 @@ const participants = [
     lol_picture: 1430,
     is_ingame: false,
     tier: "II",
+    twitter: "Thewizardragon"
+  },
+  {
+    twitch_login: "maikelfelpz",
+    twitch_display: "Maikelfelpz",
+    twitch_picture: "jtv_user_pictures/57ed10df-9adb-4e88-8571-97a8e98297f5-profile_image-300x300.png",
+    is_live: false,
+    position_change: 0,
+    position: 4,
+    riotName: "Nombre",
+    riotTag: "LAN",
+    elo: null,
+    lp: 0,
+    wins: 0,
+    losses: 0,
+    lol_picture: 1231,
+    is_ingame: false,
+    tier: null,
     twitter: null
   }
 ] as Array<Record<string, any>>;
@@ -111,7 +129,7 @@ const participants = [
                 <a target="_blank" class="small" :href="`https://twitch.tv/${p.twitch_login}`">{{ p.twitch_display }}</a>
               </div>
             </td>
-            <td scope="row" style="width: 20px;">
+            <td>
               <a v-if="p.twitter" target="_blank" :href="`https://x.com/${p.twitter}`" class="p-2 bg-black rounded d-inline-flex align-items-center small"><Icon name="simple-icons:x" /></a>
             </td>
             <td class="text-start">
@@ -121,8 +139,13 @@ const participants = [
               </div>
             </td>
             <td>
-              <small class="text-nowrap"><img :src="`/images/lol/${p.elo}.png`" height="36px"> {{ p.tier }}</small>
-              <small class="d-block text-nowrap">{{ p.lp }} LP</small>
+              <div v-if="p.elo">
+                <small class="text-nowrap"><img :src="`/images/lol/${p.elo}.png`" height="36px"> {{ p.tier }}</small>
+                <small class="d-block text-nowrap">{{ p.lp }} LP</small>
+              </div>
+              <div v-else>
+                <small class="text-nowrap"><img :src="`/images/lol/unranked.png`" height="30px"></small>
+              </div>
             </td>
             <td>
               <div class="d-flex gap-3 align-items-center justify-content-center">
@@ -137,7 +160,7 @@ const participants = [
               </div>
             </td>
             <td>
-              <small>{{ getPercentage(p.wins, p.losses) }}%</small>
+              <small v-if="p.wins && p.losses">{{ getPercentage(p.wins, p.losses) }}%</small>
             </td>
           </tr>
         </tbody>
