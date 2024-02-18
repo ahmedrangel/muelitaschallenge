@@ -1,0 +1,64 @@
+:root, [data-bs-theme="dark"] {
+  --bs-primary: #3a4052;
+  --bs-primary-rgb: 58, 64, 82;
+  --bs-body-bg: #091428;
+  --bs-body-bg-rgb: 9, 20, 40;
+  --bs-dark: var(--bs-body-bg);
+  --bs-dark-rgb: var(--bs-body-bg-rgb);
+  --bs-secondary: #29334a;
+  --bs-secondary-rgb: 41, 51, 74;
+  --bs-tertiary: #e4c692;
+  --bs-tertiary-rgb: 228, 198, 146;
+  --positive: #99ff99;
+  --negative: #ff7583;
+}
+
+.router-link-exact-active {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-tertiary-rgb),var(--bs-bg-opacity))!important;
+  color: var(--bs-dark);
+}
+
+.router-link-exact-active:hover,  .router-link-exact-active:focus {
+  background-color: rgba(255, 232, 163,var(--bs-bg-opacity))!important;
+  color: var(--bs-dark);
+}
+
+.text-positive {
+  color: var(--positive);
+}
+
+.text-negative {
+  color: var(--negative);
+}
+
+.bg-positive {
+  background-color: var(--positive);
+}
+
+.bg-negative {
+  background-color: var(--negative);
+}
+
+.live {
+  color: #ff2b2b;
+}
+
+.not-live {
+  color: #5d5d5d;
+}
+
+.ingame, .not-ingame {
+  border: 2px solid;
+}
+.ingame {
+  border-color: #15adc4;
+}
+
+.not-ingame {
+  border-color: #5d5d5d;
+}
+
+.twitch {
+  color: #bf94ff;
+}
