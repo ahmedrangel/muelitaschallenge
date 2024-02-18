@@ -4,9 +4,6 @@ export default defineNuxtConfig({
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
       title: "",
-      bodyAttrs: {
-        "data-bs-theme": "dark"
-      },
       htmlAttrs: {
         lang: "en"
       },
