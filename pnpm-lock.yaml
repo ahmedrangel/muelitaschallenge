@@ -13,9 +13,6 @@ devDependencies:
   '@nuxt/eslint-config':
     specifier: ^0.2.0
     version: 0.2.0(eslint@8.56.0)
-  '@nuxtjs/color-mode':
-    specifier: ^3.3.2
-    version: 3.3.2
   '@types/bootstrap':
     specifier: ^5.2.10
     version: 5.2.10

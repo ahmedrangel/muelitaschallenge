@@ -5,7 +5,8 @@ export default defineNuxtConfig({
       viewport: "width=device-width, initial-scale=1",
       title: "",
       htmlAttrs: {
-        lang: "en"
+        lang: "en",
+        "data-bs-theme": "dark"
       },
       meta: [
         { name: "robots", content: "index, follow" }
@@ -20,18 +21,11 @@ export default defineNuxtConfig({
   ],
   modules: [
     "nuxt-icon",
-    "@nuxtjs/color-mode",
     "nuxt-simple-sitemap"
   ],
   runtimeConfig: {},
   features: {
     inlineStyles: false
-  },
-  colorMode: {
-    preference: "dark",
-    fallback: "dark",
-    dataValue: "bs-theme",
-    storageKey: "nuxt-color-mode"
   },
   site: {
     url: ""
