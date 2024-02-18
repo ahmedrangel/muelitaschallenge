@@ -106,19 +106,19 @@ const participants = [
               </span>
             </td>
             <td class="text-start">
-              <div class="d-flex align-items-center gap-2">
+              <a class="d-flex align-items-center gap-2 small" target="_blank" :href="`https://twitch.tv/${p.twitch_login}`">
                 <img class="rounded-circle img-profile" :src="`https://static-cdn.jtvnw.net/${p.twitch_picture}`">
-                <a target="_blank" class="small" :href="`https://twitch.tv/${p.twitch_login}`">{{ p.twitch_display }}</a>
-              </div>
+                <span>{{ p.twitch_display }}</span>
+              </a>
             </td>
             <td scope="row" style="width: 20px;">
               <a v-if="p.twitter" target="_blank" :href="`https://x.com/${p.twitter}`" class="p-2 bg-black rounded d-inline-flex align-items-center small"><Icon name="simple-icons:x" /></a>
             </td>
             <td class="text-start">
-              <div class="d-flex align-items-center gap-2">
+              <a class="d-flex align-items-center gap-2 small" target="_blank" :href="`https://op.gg/summoners/lan/${p.riotName}-${p.riotTag}`">
                 <img class="rounded-circle img-profile" :class="`${p.is_ingame ? 'ingame' : 'not-ingame'}`" :src="`https://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${p.lol_picture}.png`">
-                <a target="_blank" class="small" :href="`https://op.gg/summoners/lan/${p.riotName}-${p.riotTag}`">{{ p.riotName }} #{{ p.riotTag }}</a>
-              </div>
+                <span>{{ p.riotName }} #{{ p.riotTag }}</span>
+              </a>
             </td>
             <td>
               <small class="text-nowrap"><img :src="`/images/lol/${p.elo}.png`" height="36px"> {{ p.tier }}</small>
