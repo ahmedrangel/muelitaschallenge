@@ -19,6 +19,11 @@ a:hover {
   height: 50px;
 }
 
+img {
+  pointer-events: none;
+  user-select: none;
+}
+
 @media only screen and (width <= 767px) {
   .img-profile {
     height: 36px;
