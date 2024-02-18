@@ -15,7 +15,8 @@ const participants = [
     losses: 10,
     lol_picture: 588,
     is_ingame: true,
-    tier: null
+    tier: null,
+    twitter: "AhmedRangel"
   },
   {
     twitch_login: "yizack",
@@ -32,7 +33,8 @@ const participants = [
     losses: 25,
     lol_picture: 1230,
     is_ingame: false,
-    tier: null
+    tier: null,
+    twitter: "Yizack"
   },
   {
     twitch_login: "thewizardragon",
@@ -49,7 +51,8 @@ const participants = [
     losses: 15,
     lol_picture: 1430,
     is_ingame: false,
-    tier: "II"
+    tier: "II",
+    twitter: null
   }
 ] as Array<Record<string, any>>;
 </script>
@@ -106,7 +109,7 @@ const participants = [
               </div>
             </td>
             <td scope="row" style="width: 20px;">
-              <span class="p-2 bg-black rounded d-inline-flex align-items-center"><Icon name="simple-icons:x" /></span>
+              <a v-if="p.twitter" target="_blank" :href="`https://x.com/${p.twitter}`" class="p-2 bg-black rounded d-inline-flex align-items-center"><Icon name="simple-icons:x" /></a>
             </td>
             <td class="text-start">
               <div class="d-flex align-items-center gap-2">
