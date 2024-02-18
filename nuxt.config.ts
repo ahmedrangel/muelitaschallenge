@@ -4,6 +4,9 @@ export default defineNuxtConfig({
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
       title: "",
+      bodyAttrs: {
+        "data-bs-theme": "dark"
+      },
       htmlAttrs: {
         lang: "en"
       },
@@ -28,8 +31,8 @@ export default defineNuxtConfig({
     inlineStyles: false
   },
   colorMode: {
-    preference: "light",
-    fallback: "light",
+    preference: "dark",
+    fallback: "dark",
     dataValue: "bs-theme",
     storageKey: "nuxt-color-mode"
   },
