@@ -101,7 +101,7 @@ const participants = [
               </div>
             </th>
             <td scope="row" style="width: 20px;">
-              <span :class="`${ p.is_live ? 'live' : 'not-live'}`">
+              <span class="d-flex align-items-center" :class="`${ p.is_live ? 'live' : 'not-live'}`">
                 <Icon name="ph:circle-fill" />
               </span>
             </td>
