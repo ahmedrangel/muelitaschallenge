@@ -5,10 +5,6 @@
   --bs-table-striped-bg: var(--bs-secondary);
 }
 
-.table>:not(caption)>*>* {
-  padding: .5rem 1rem;
-}
-
 a {
   color: white;
   text-decoration: none;
@@ -17,4 +13,18 @@ a {
 a:hover {
   color: var(--bs-tertiary);
   text-decoration: underline;
+}
+
+.img-profile {
+  height: 50px;
+}
+
+@media only screen and (width <= 767px) {
+  .img-profile {
+    height: 36px;
+  }
+
+  .small, small {
+    font-size: .7em
+  }
 }
