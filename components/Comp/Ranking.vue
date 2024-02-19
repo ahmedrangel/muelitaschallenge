@@ -6,52 +6,27 @@ const props = defineProps({
 const participants = ref(props.data);
 
 const sort = (type: string, order: string) => {
-  if (order === "init") {
+  const sorters: Record<string, (a: any, b: any) => number> = {
+    rank: (a, b) => order === "desc" ? b.position - a.position : a.position - b.position,
+    is_live: (a, b) => order === "desc" ? b.is_live - a.is_live : a.is_live - b.is_live,
+    streamer: (a, b) => order === "desc" ? b.twitch_login.localeCompare(a.twitch_login) : a.twitch_login.localeCompare(b.twitch_login),
+    account: (a, b) => order === "desc" ? b.riot_name.localeCompare(a.riot_name) : a.riot_name.localeCompare(b.riot_name),
+    elo: (a, b) => order === "desc" ? a.position - b.position : b.position - a.position,
+    matches: (a, b) => order === "desc" ? (b.wins + b.losses) - (a.wins + a.losses) : (a.wins + a.losses) - (b.wins + b.losses),
+    v_d: (a, b) => order === "desc" ? b.wins - a.wins : a.wins - b.wins,
+    winrate: (a, b) => order === "desc" ? (b.wins / (b.wins + b.losses) * 100) - (a.wins / (a.wins + a.losses) * 100) : (a.wins / (a.wins + a.losses) * 100) - (b.wins / (b.wins + b.losses) * 100),
+  };
+
+  if (!type && order === "init") {
     participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
       return a.position - b.position;
     });
   }
-  else if (type === "rank") {
-    participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
-      return order === "desc" ? b.position - a.position : a.position - b.position;
-    });
-  }
-  else if (type === "is_live") {
-    participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
-      return order === "desc" ? b.is_live - a.is_live : a.is_live - b.is_live;
-    });
-  }
-  else if (type === "streamer") {
-    participants.value.sort((a: Record<string, string>, b: Record<string, string>) => {
-      return order === "desc" ? b.twitch_login.localeCompare(a.twitch_login) : a.twitch_login.localeCompare(b.twitch_login);
-    });
-  }
-  else if (type === "account") {
-    participants.value.sort((a: Record<string, string>, b: Record<string, string>) => {
-      return order === "desc" ? b.riot_name.localeCompare(a.riot_name) : a.riot_name.localeCompare(b.riot_name);
-    });
-  }
-  else if (type === "elo") {
-    participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
-      return order === "desc" ? a.position - b.position : b.position - a.position;
-    });
-  }
-  else if (type === "matches") {
-    participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
-      return order === "desc" ? (b.wins + b.losses) - (a.wins + a.losses) : (a.wins + a.losses) - (b.wins + b.losses);
-    });
-  }
-  else if (type === "v_d") {
-    participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
-      return order === "desc" ? (b.wins) - (a.wins) : (a.wins) - (b.wins);
-    });
-  }
-  else if (type === "winrate") {
-    participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
-      return order === "desc" ? (b.wins/(b.wins + b.losses) * 100) - (a.wins/(a.wins + a.losses) * 100) : (a.wins/(a.wins + a.losses) * 100) - (b.wins/(b.wins + b.losses) * 100);
-    });
+  else if (sorters[type]) {
+    participants.value.sort(sorters[type]);
   }
 };
+
 const removeSort = (currentId: string) => {
   document.querySelectorAll(".desc").forEach(el => {
     if (el.id !== currentId) el.classList.remove("desc");
@@ -77,7 +52,7 @@ const toggleClass = (head: HTMLElement) => {
 const clickHandler = (head: HTMLElement) => {
   removeSort(head.id);
   toggleClass(head);
-  head.classList.contains("desc") ? sort(head.id, "desc") : head.classList.contains("asc") ? sort(head.id, "asc") : sort(head.id, "init");
+  head.classList.contains("desc") ? sort(head.id, "desc") : head.classList.contains("asc") ? sort(head.id, "asc") : sort("", "init");
 };
 
 const sorterHandler = (type: string) => {
