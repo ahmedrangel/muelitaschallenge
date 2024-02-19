@@ -1,6 +1,8 @@
-import twitchApi from "./apis/twitchApi";
-import riotApi, { eloValues } from "./apis/riotApi";
-import { fixRank } from "./utils/helpers";
+import twitchApi from "../apis/twitchApi";
+import riotApi, { eloValues } from "../apis/riotApi";
+import { fixRank } from "../utils/helpers";
+
+const region = "lan";
 
 export const updateGeneralData = async(env) => {
   const { results } = await env.PARTICIPANTS.prepare("SELECT id_summoner, twitch_login, position, position_change from participants").all();
@@ -46,4 +48,6 @@ export const updateGeneralData = async(env) => {
     await env.PARTICIPANTS.prepare("UPDATE participants SET is_live = ? WHERE twitch_login = ?")
       .bind(1, s.user_login).run();
   }
+
+  return sorted;
 };
