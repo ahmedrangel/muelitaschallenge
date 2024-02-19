@@ -1,0 +1,11 @@
+name = "soloqchallenge"
+main = "src/index.js"
+compatibility_date = "2024-02-18"
+
+[triggers]
+crons = [] # "*/5 * * * *"
+
+[[d1_databases]]
+binding = "PARTICIPANTS"
+database_name = "soloqchallenge"
+database_id = "f227fc31-54b1-4a77-be0a-1438e6b41385"
