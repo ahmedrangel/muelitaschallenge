@@ -32,7 +32,7 @@ class twitchApi {
 
       if(!access_token) return null;
 
-      const response = await fetch(api, {headers: headers});
+      const response = await fetch(api, {headers});
       const { data } = await response.json();
       return data[0];
     }
@@ -42,20 +42,21 @@ class twitchApi {
     }
   }
 
-  async getStreamsByName(name) {
+  async getStreamsByName(array) {
     try {
       const access_token = await this.getAccessToken();
-      const api = `${this.API_BASE}/streams?user_login=${name.toLowerCase()}`;
+      const arrayString = array.filter((name, index) => array.indexOf(name) === index).map(login => `user_login=${login}`).join("&");
+      const api = `${this.API_BASE}/streams?${arrayString}`;
       const headers = {
         "Client-ID": this.TWITCH_CLIENT_ID,
         "Authorization": "Bearer " + access_token
       };
 
-      if(!accessToken) return null;
+      if(!access_token) return null;
 
-      const response = await fetch(api, {headers: headers});
+      const response = await fetch(api, {headers});
       const { data } = await response.json();
-      return data[0];
+      return data;
     }
     catch (err) {
       console.info(err);
