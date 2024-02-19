@@ -14,7 +14,7 @@ router.post("/add", async (req, env) => {
   const route = _riot.route(region);
   const cluster = _riot.cluster(region);
   try {
-    const { riot_name, riot_tag, key, twitch, twitter } = await req.json();
+    const { riot_name, riot_tag, key, twitch, twitter, instagram } = await req.json();
     if (key === env.POST_KEY) {
       if (!riot_name || !riot_tag || !twitch) return new JsonResponse({ status: "Bad Request", status_code: 400 });
       // League of legends
@@ -30,11 +30,11 @@ router.post("/add", async (req, env) => {
       // Add DB
       await env.PARTICIPANTS.prepare(
         `
-        INSERT OR IGNORE INTO participants (puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT OR IGNORE INTO participants (puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter, instagram)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `
-      ).bind(puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter ? twitter : "").run();
-      return new JsonResponse({ puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter: twitter ? twitter : ""});
+      ).bind(puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter ? twitter : "", instagram ? instagram : "").run();
+      return new JsonResponse({ puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter: twitter ? twitter : "", instagram: instagram ? instagram : ""});
     }
     return new JsonResponse({ status: "Forbidden", status_code: 403 });
   }
@@ -44,7 +44,7 @@ router.post("/add", async (req, env) => {
 });
 
 router.get("/participants", async (req, env) => {
-  const { results } = await env.PARTICIPANTS.prepare("SELECT riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter, is_live, is_ingame, wins, losses, lp, elo, tier, position, position_change from participants").all();
+  const { results } = await env.PARTICIPANTS.prepare("SELECT riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter, is_live, is_ingame, wins, losses, lp, elo, tier, position, position_change, instagram from participants").all();
   return new JsonResponse(results.sort((a, b) => {
     if (!a.position || !b.position) {
       if (!a.position) return 1; // Colocar a 'a' al final

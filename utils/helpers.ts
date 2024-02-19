@@ -28,6 +28,11 @@ export const table_head = [
     sortable: true
   },
   {
+    name: "Instagram",
+    icon: "simple-icons:instagram",
+    sortable: false
+  },
+  {
     name: "Twitter X",
     icon: "simple-icons:x",
     sortable: false
