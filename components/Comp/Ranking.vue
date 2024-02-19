@@ -151,7 +151,7 @@ onBeforeUnmount(() => {
             </div>
           </td>
           <td>
-            <div v-if="p.elo">
+            <div v-if="p.elo" class="py-1">
               <small class="text-nowrap"><img :src="`/images/lol/${p.elo}.png`" height="36px"> {{ p.tier }}</small>
               <small class="d-block text-nowrap">{{ p.lp }} LP</small>
             </div>
