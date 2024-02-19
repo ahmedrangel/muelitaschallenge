@@ -54,7 +54,6 @@ class riotApi {
     return data;
   }
 }
-export default riotApi;
 
 export const eloValues = {
   "IRON IV": 1,
@@ -89,3 +88,5 @@ export const eloValues = {
   "GRANDMASTER I": 30,
   "CHALLENGER I": 31
 };
+
+export default riotApi;
