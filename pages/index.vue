@@ -8,6 +8,6 @@ const { data: participants } = await useFetch("/api/participants") as Record<str
     <!-- Cantidad de participantes -->
     <CompParticipantsCounter :data="participants" />
     <!-- Tabla de clasificación -->
-    <CompRanking :data="participants" />
+    <CompRanking v-if="participants" :data="participants" />
   </main>
 </template>
