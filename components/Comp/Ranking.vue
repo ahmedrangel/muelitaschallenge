@@ -6,7 +6,7 @@ const props = defineProps({
 const participants = ref(props.data);
 
 const sort = (type: string, order: string) => {
-  if (type === "rank" || type === "elo") {
+  if (type === "rank") {
     participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
       return order === "desc" ? b.position - a.position : a.position - b.position;
     });
@@ -24,6 +24,11 @@ const sort = (type: string, order: string) => {
   if (type === "account") {
     participants.value.sort((a: Record<string, string>, b: Record<string, string>) => {
       return order === "desc" ? b.riot_name.localeCompare(a.riot_name) : a.riot_name.localeCompare(b.riot_name);
+    });
+  }
+  if (type === "elo") {
+    participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
+      return order === "desc" ? a.position - b.position : b.position - a.position;
     });
   }
   if (type === "matches") {
