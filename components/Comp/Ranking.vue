@@ -19,6 +19,10 @@ const sort = (type: string, order: string) => {
 
   if (!type && order === "init") {
     participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
+      if (!a.position || !b.position) {
+        if (!a.position) return 1; // Colocar a 'a' al final
+        if (!b.position) return -1; // Colocar a 'b' al final
+      }
       return a.position - b.position;
     });
   }
