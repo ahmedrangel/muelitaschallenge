@@ -16,18 +16,22 @@ const sort = (type: string, order: string) => {
     v_d: (a, b) => order === "desc" ? b.wins - a.wins : a.wins - b.wins,
     winrate: (a, b) => order === "desc" ? (b.wins / (b.wins + b.losses) * 100) - (a.wins / (a.wins + a.losses) * 100) : (a.wins / (a.wins + a.losses) * 100) - (b.wins / (b.wins + b.losses) * 100),
   };
-
   if (!type && order === "init") {
     participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
       if (!a.position || !b.position) {
-        if (!a.position) return 1; // Colocar a 'a' al final
-        if (!b.position) return -1; // Colocar a 'b' al final
+        if (!a.position) return 1;
+        if (!b.position) return -1;
       }
       return a.position - b.position;
     });
   }
   else if (sorters[type]) {
-    participants.value.sort(sorters[type]);
+    participants.value.sort(sorters[type]).sort((a: Record<string, number>, b: Record<string, number>) => {
+      if (!a.position || !b.position) {
+        if (!a.position) return 1;
+        if (!b.position) return -1;
+      }
+    });
   }
 };
 
