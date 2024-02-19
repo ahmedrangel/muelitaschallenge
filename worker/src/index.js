@@ -58,6 +58,14 @@ router.get("/update-test", async (req, env) => {
   return new JsonResponse(await updateGeneralData(env));
 });
 
+router.get("/reset-position-change", async (req, env) => {
+  const { results } = await env.PARTICIPANTS.prepare("SELECT id_summoner, position_change from participants").all();
+  for (const r of results) {
+    await env.PARTICIPANTS.prepare("UPDATE participants SET position_change = 0 WHERE id_summoner = ?").bind(r.id_summoner).run();
+  }
+  return new JsonResponse(results);
+});
+
 router.all("*", () => new JsResponse("Not Found.", { status: 404 }));
 
 export default {
