@@ -77,9 +77,9 @@ const { data: participants } = await useFetch("/api/participants") as Record<str
             <td>
               <div class="d-flex gap-3 align-items-center justify-content-center">
                 <small>{{ p.wins + p.losses }}</small>
-                <div>
+                <div class="d-flex flex-column align-items-center">
                   <small>{{ p.wins }}<span class="text-muted"> V</span> <span class="text-muted">|</span> {{ p.losses }}<span class="text-muted"> D</span></small>
-                  <div class="progress mt-2 rounded-1" style="width: 70px; height: 10px;">
+                  <div class="progress mt-2 rounded-1 " style="width: 70px; height: 10px;">
                     <div class="progress-bar bg-positive" role="progressbar" :style="{'width': (p.wins/(p.wins + p.losses) * 100) + '%' }" />
                     <div class="progress-bar bg-negative" role="progressbar" :style="{'width': (p.losses/(p.wins + p.losses) * 100) + '%' }" />
                   </div>
