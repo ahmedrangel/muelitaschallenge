@@ -1,0 +1,30 @@
+th.sortable {
+  position: relative;
+  cursor: pointer;
+}
+
+th.sortable .arrows {
+  width: 20px;
+  filter: invert(100%) sepia(0%) saturate(7474%) hue-rotate(57deg) brightness(109%) contrast(101%);
+}
+
+th.sortable:hover .arrows {
+  filter: invert(4%) sepia(41%) saturate(3713%) hue-rotate(209deg) brightness(99%) contrast(96%);
+}
+
+th.sortable .arrows {
+  content: url("/images/sort-both.svg");
+}
+
+th.sortable.desc .arrows {
+  content: url("/images/sort-desc.svg");
+}
+
+th.sortable.asc .arrows {
+  content: url("/images/sort-asc.svg");
+}
+
+th.sortable:hover {
+  background-color: var(--bs-tertiary);
+  color: var(--bs-dark);
+}

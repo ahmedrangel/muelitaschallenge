@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     "~/assets/css/main.css",
     "~/assets/css/transitions.css",
     "~/assets/css/theme.css",
+    "~/assets/css/tables.css",
   ],
   modules: [
     "nuxt-icon",
