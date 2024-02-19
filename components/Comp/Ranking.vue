@@ -103,8 +103,8 @@ onBeforeUnmount(() => {
           </template>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="p of participants" :key="p.position" class="text-center align-middle border">
+      <tbody class="border">
+        <tr v-for="p of participants" :key="p.position" class="text-center align-middle">
           <th scope="row" style="width: 20px;"><small>{{ p.position }}</small></th>
           <th scope="row" style="width: 40px;">
             <div class="d-flex align-items-center justify-content-center gap-1" :class="`${p.position_change > 0 ? 'text-positive' : p.position_change < 0 ? 'text-negative' : 'text-muted'}`">
