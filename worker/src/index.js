@@ -45,7 +45,13 @@ router.post("/add", async (req, env) => {
 
 router.get("/participants", async (req, env) => {
   const { results } = await env.PARTICIPANTS.prepare("SELECT riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter, is_live, is_ingame, wins, losses, lp, elo, tier, position, position_change from participants").all();
-  return new JsonResponse(results);
+  return new JsonResponse(results.sort((a, b) => {
+    if (!a.position || !b.position) {
+      if (!a.position) return 1; // Colocar a 'a' al final
+      if (!b.position) return -1; // Colocar a 'b' al final
+    }
+    return a.position - b.position;
+  }));
 });
 
 router.get("/update-test", async (req, env) => {
