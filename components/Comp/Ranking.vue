@@ -100,7 +100,7 @@ onBeforeUnmount(() => {
         <tr style="height: 40px;" class="align-middle text-center">
           <template v-for="(h, i) of table_head" :key="i">
             <th :id="h.id" scope="col" :class="`${h.sortable ? 'sortable' : ''}`" class="user-select-none" :title="h.name">
-              <div v-if="h.sortable" class="d-flex align-items-center justify-content-center">
+              <div v-if="h.sortable" class="d-flex align-items-center justify-content-evenly">
                 <div v-if="h.title" class="d-flex align-items-center">
                   <Icon v-if="h.icon" :class="`${h.icon_class ? h.icon_class : ''}`" :name="`${h.icon ? h.icon : ''}`" />
                   <img v-if="h.svg" :src="h.svg" width="23px">
