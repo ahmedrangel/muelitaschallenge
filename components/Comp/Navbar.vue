@@ -37,11 +37,11 @@ beforeEach(({ name }) => {
         <span class="navbar-toggler-icon" />
       </button>
       <div class="navbar-brand ms-2 ms-lg-0 me-auto d-flex align-items-center gap-1 text-decoration-none">
-        <span width="45">SoloCuck Challenge</span>
+        <span width="45">SoloQ Challenge</span>
       </div>
       <div id="offcanvasNavbar" class="offcanvas offcanvas-start bg-secondary" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header px-5 pt-4 pb-0">
-          <span width="45">SoloCuck Challenge</span>
+          <span width="45">SoloQ Challenge</span>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" />
         </div>
         <div class="offcanvas-body">
