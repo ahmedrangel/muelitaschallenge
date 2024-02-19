@@ -32,14 +32,19 @@ router.post("/add", async (req, env) => {
         INSERT OR IGNORE INTO participants (puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `
-      ).bind(puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter).run();
-      return new JsonResponse({ puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter });
+      ).bind(puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter ? twitter : "").run();
+      return new JsonResponse({ puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter: twitter ? twitter : ""});
     }
     return new JsonResponse({ status: "Forbidden", status_code: 403 });
   }
   catch (err) {
     return new JsonResponse({ status: "Bad Request", status_code: 400 });
   }
+});
+
+router.get("/participants", async (req, env) => {
+  const { results } = await env.PARTICIPANTS.prepare("SELECT riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter, is_live, is_ingame, wins, losses, lp, elo, tier, position, position_change from participants").all();
+  return new JsonResponse(results);
 });
 
 router.all("*", () => new JsResponse("Not Found.", { status: 404 }));
