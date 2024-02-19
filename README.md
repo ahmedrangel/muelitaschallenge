@@ -1,1 +1,1 @@
-# SoloQChallenge
+# SoloQChallenge Demo
