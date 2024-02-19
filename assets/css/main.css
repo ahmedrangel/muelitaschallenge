@@ -1,10 +1,4 @@
 /* main.css */
-
-.table {
-  --bs-table-bg: var(--bs-primary);
-  --bs-table-striped-bg: var(--bs-secondary);
-}
-
 a {
   color: white;
   text-decoration: none;
