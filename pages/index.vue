@@ -1,78 +1,5 @@
 <script setup lang="ts">
-const participants = [
-  {
-    twitch_login: "ahmed_r",
-    twitch_display: "Ahmed_R",
-    twitch_picture: "jtv_user_pictures/9d70dd3e-e05f-4bf7-aaa6-2ad5df0875a5-profile_image-300x300.png",
-    is_live: true,
-    position_change: 10,
-    position: 1,
-    riotName: "Nombre",
-    riotTag: "LAN",
-    elo: "challenger",
-    lp: 800,
-    wins: 90,
-    losses: 10,
-    lol_picture: 588,
-    is_ingame: true,
-    tier: null,
-    twitter: "AhmedRangel"
-  },
-  {
-    twitch_login: "yizack",
-    twitch_display: "Yizack",
-    twitch_picture: "jtv_user_pictures/eda66302-4427-4a61-ba2f-4a843caa6b9a-profile_image-300x300.png",
-    is_live: false,
-    position_change: 0,
-    position: 2,
-    riotName: "Nombre",
-    riotTag: "LAN",
-    elo: "grandmaster",
-    lp: 450,
-    wins: 63,
-    losses: 25,
-    lol_picture: 1230,
-    is_ingame: false,
-    tier: null,
-    twitter: "Yizackr"
-  },
-  {
-    twitch_login: "thewizardragon",
-    twitch_display: "Thewizardragon",
-    twitch_picture: "jtv_user_pictures/21ede6f3-6bdb-4968-872c-fcd7a99273d8-profile_image-300x300.png",
-    is_live: false,
-    position_change: -2,
-    position: 3,
-    riotName: "Nombre",
-    riotTag: "LAN",
-    elo: "platinum",
-    lp: 0,
-    wins: 16,
-    losses: 15,
-    lol_picture: 1430,
-    is_ingame: false,
-    tier: "II",
-    twitter: "Thewizardragon"
-  },
-  {
-    twitch_login: "maikelfelpz",
-    twitch_display: "Maikelfelpz",
-    twitch_picture: "jtv_user_pictures/57ed10df-9adb-4e88-8571-97a8e98297f5-profile_image-300x300.png",
-    is_live: false,
-    position_change: 0,
-    position: 4,
-    riotName: "Nombre",
-    riotTag: "LAN",
-    elo: null,
-    lp: 0,
-    wins: 0,
-    losses: 0,
-    lol_picture: 1231,
-    is_ingame: false,
-    tier: null,
-    twitter: null
-  }
-] as Array<Record<string, any>>;
+const { data: participants } = await useFetch("/api/participants") as Record<string, any>;
 </script>
 
 <template>
@@ -135,7 +62,7 @@ const participants = [
             <td class="text-start">
               <div class="d-flex align-items-center gap-2">
                 <img class="rounded-circle img-profile" :class="`${p.is_ingame ? 'ingame' : 'not-ingame'}`" :src="`https://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${p.lol_picture}.png`">
-                <a target="_blank" class="small" :href="`https://op.gg/summoners/lan/${p.riotName}-${p.riotTag}`">{{ p.riotName }} #{{ p.riotTag }}</a>
+                <a target="_blank" class="small" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`">{{ p.riot_name }} #{{ p.riot_tag }}</a>
               </div>
             </td>
             <td>
