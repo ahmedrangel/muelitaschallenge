@@ -6,6 +6,7 @@ const region = "lan";
 
 export const updateGeneralData = async(env) => {
   const { results } = await env.PARTICIPANTS.prepare("SELECT id_summoner, twitch_login, position, position_change from participants").all();
+  if (!results[0]) return null;
   const _riot = new riotApi(env.RIOT_KEY);
   const _twitch = new twitchApi(env.TWITCH_CLIENT_ID, env.TWITCH_CLIENT_SECRET);
   const route = _riot.route(region);
