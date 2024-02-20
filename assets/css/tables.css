@@ -4,7 +4,7 @@ th.sortable {
 }
 
 th.sortable .arrows {
-  width: 20px;
+  width: 16px;
   filter: invert(100%) sepia(0%) saturate(7474%) hue-rotate(57deg) brightness(109%) contrast(101%);
 }
 
