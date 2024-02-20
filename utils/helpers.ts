@@ -70,3 +70,36 @@ export const table_head = [
     sortable: true
   }
 ];
+
+export const getTimeUnitsFromISODate = (ISO: string) => {
+  const targetDate = new Date(ISO);
+
+  const today = new Date();
+
+  const msdiff = Number(today) - Number(targetDate);
+
+  const unMinuto = 60 * 1000;
+  const unaHora = unMinuto * 60;
+  const unDia = unaHora * 24;
+  const unMes = unDia * 30.4375;
+  const unAnio = unDia * 365.242189;
+
+  const anios = Math.floor(msdiff / unAnio);
+  const meses = Math.floor((msdiff % unAnio) / unMes);
+  const dias = Math.floor((msdiff % unMes) / unDia);
+  const horas = Math.floor((msdiff % unDia) / unaHora);
+  const minutos = Math.floor(msdiff % unaHora / unMinuto);
+  const segundos = Math.floor(msdiff % unMinuto / 1000);
+
+  const unidades = [];
+
+  if (anios > 0) unidades.push(`${anios} año${anios !== 1 ? "s" : ""}`);
+  if (meses > 0) unidades.push(`${meses} mes${meses !== 1 ? "es" : ""}`);
+  if (dias > 0) unidades.push(`${dias} día${dias !== 1 ? "s" : ""}`);
+  if (horas > 0) unidades.push(`${horas} hora${horas !== 1 ? "s" : ""}`);
+  if (minutos > 0 && anios === 0) unidades.push(`${minutos} minuto${minutos !== 1 ? "s" : ""}`);
+  if (segundos > 0 && anios === 0 && meses === 0 && dias === 0 && horas === 0 && minutos === 0) unidades.push(`${segundos} segundo${segundos !== 1 ? "s" : ""}`);
+
+  const result = unidades.join(", ");
+  return result;
+};
