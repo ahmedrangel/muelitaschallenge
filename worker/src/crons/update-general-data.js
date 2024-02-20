@@ -22,7 +22,9 @@ const updateRankedData = async(env, p) => {
 };
 
 const sortRankedData = async(env) => {
-// Sort participants by elo and lp
+  if (!participants[0]) return null;
+
+  // Sort participants by elo and lp
   const sorted = participants.sort((a, b) => {
     const eloComparison = eloValues[`${b.elo} ${b.tier}`] - eloValues[`${a.elo} ${a.tier}`];
     if (eloComparison !== 0) {
