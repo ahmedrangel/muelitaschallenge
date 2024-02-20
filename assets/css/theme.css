@@ -44,19 +44,16 @@
   color: #ff2b2b;
 }
 
-.not-live {
+.not-live, .not-ingame {
   color: #5d5d5d;
 }
 
-.ingame, .not-ingame {
-  border: 2px solid;
-}
 .ingame {
-  border-color: #15adc4;
+  color: #2de3ff;
 }
 
 .not-ingame {
-  border-color: #5d5d5d;
+  border: none;
 }
 
 .twitch {

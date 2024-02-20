@@ -21,6 +21,22 @@ const updateRankedData = async(env, p) => {
   return participants;
 };
 
+// Iterated fetch
+const updateLolIngameStatus = async(env, p) => {
+  const _riot = new riotApi(env.RIOT_KEY);
+  const route = _riot.route(region);
+  const ingame_data = await _riot.getLiveGameBySummonerId(p.id_summoner, route);
+
+  if (ingame_data?.participants) {
+    await env.PARTICIPANTS.prepare("UPDATE participants SET is_ingame = ? WHERE id_summoner = ?")
+      .bind(1, p.id_summoner).run();
+  }
+  else {
+    await env.PARTICIPANTS.prepare("UPDATE participants SET is_ingame = ? WHERE id_summoner = ?")
+      .bind(0, p.id_summoner).run();
+  }
+};
+
 const sortRankedData = async(env) => {
   if (!participants[0]) return null;
 
@@ -82,6 +98,7 @@ export const updateGeneralData = async(env) => {
   for (const p of results) {
     twitch_ids.push(p.twitch_id);
     await updateRankedData(env, p);
+    await updateLolIngameStatus(env, p);
   }
 
   const sorted = await sortRankedData(env);

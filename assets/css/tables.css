@@ -29,7 +29,7 @@ th.sortable:hover, th.sortable.asc, th.sortable.desc {
   color: var(--bs-dark);
 }
 
-th.sortable.live_sort .arrows {
+th.sortable.live_sort .arrows, th.sortable.ingame_sort .arrows {
   filter: none;
 }
 
@@ -41,8 +41,16 @@ th.sortable.live_sort.desc .arrows {
   content: url("/images/sort-live-desc.svg");
 }
 
-th.sortable.live_sort.asc .arrows {
+th.sortable.live_sort.asc .arrows, th.sortable.ingame_sort.asc .arrows {
   content: url("/images/sort-live-asc.svg");
+}
+
+th.sortable.ingame_sort .arrows {
+  content: url("/images/sort-ingame-both.svg");
+}
+
+th.sortable.ingame_sort.desc .arrows {
+  content: url("/images/sort-ingame-desc.svg");
 }
 
 .table {

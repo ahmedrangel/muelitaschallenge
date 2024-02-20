@@ -10,6 +10,7 @@ const sort = (type: string, order: string) => {
     rank: (a, b) => order === "desc" ? b.position - a.position : a.position - b.position,
     is_live: (a, b) => order === "desc" ? b.is_live - a.is_live : a.is_live - b.is_live,
     streamer: (a, b) => order === "desc" ? b.twitch_login.localeCompare(a.twitch_login) : a.twitch_login.localeCompare(b.twitch_login),
+    is_ingame: (a, b) => order === "desc" ? b.is_ingame - a.is_ingame : a.is_ingame - b.is_ingame,
     account: (a, b) => order === "desc" ? b.riot_name.localeCompare(a.riot_name) : a.riot_name.localeCompare(b.riot_name),
     elo: (a, b) => order === "desc" ? a.position - b.position : b.position - a.position,
     matches: (a, b) => order === "desc" ? (b.wins + b.losses) - (a.wins + a.losses) : (a.wins + a.losses) - (b.wins + b.losses),
@@ -137,9 +138,14 @@ onBeforeUnmount(() => {
           <td>
             <a v-if="p.twitter" target="_blank" :href="`https://x.com/${p.twitter}`" class="p-2 bg-black rounded d-inline-flex align-items-center small text-white"><Icon name="simple-icons:x" /></a>
           </td>
+          <td scope="row" style="width: 20px;">
+            <span class="d-flex align-items-center" :class="`${p.is_ingame ? 'ingame' : 'not-ingame'}`">
+              <Icon name="ph:circle-fill" />
+            </span>
+          </td>
           <td class="text-start">
             <div class="d-flex align-items-center gap-2">
-              <img class="rounded-circle img-profile" :class="`${p.is_ingame ? 'ingame' : 'not-ingame'}`" :src="`https://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${p.lol_picture}.png`">
+              <img class="rounded-circle img-profile" :src="`https://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${p.lol_picture}.png`">
               <a target="_blank" class="small text-nowrap" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`">{{ p.riot_name }} #{{ p.riot_tag }}</a>
             </div>
           </td>

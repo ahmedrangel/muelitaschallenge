@@ -39,6 +39,12 @@ export const table_head = [
     sortable: false
   },
   {
+    id: "is_ingame",
+    name: "En partida",
+    sortable: true,
+    custom_class: "ingame_sort"
+  },
+  {
     id: "account",
     name: "Cuenta",
     title: "Cuenta",
