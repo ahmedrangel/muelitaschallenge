@@ -24,11 +24,11 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.2.0",
+    "@nuxtjs/sitemap": "^5.1.0",
     "@types/bootstrap": "^5.2.10",
     "eslint": "^8.56.0",
     "nuxt": "^3.10.2",
     "nuxt-icon": "^0.6.8",
-    "nuxt-simple-sitemap": "^4.4.1",
     "stylelint-config-standard": "^36.0.0"
   },
   "dependencies": {

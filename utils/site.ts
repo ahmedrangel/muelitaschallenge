@@ -1,3 +1,4 @@
 export const SITE = {
-  host: "https://localhost:5173"
+  title: "SoloQ Challenge Demo",
+  host: "https://soloqchallenge.pages.dev"
 };

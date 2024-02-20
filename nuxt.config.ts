@@ -1,9 +1,11 @@
+import { SITE } from "./utils/site";
+
 export default defineNuxtConfig({
   app: {
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
-      title: "",
+      title: SITE.title,
       htmlAttrs: {
         lang: "en",
         "data-bs-theme": "dark"
@@ -22,14 +24,14 @@ export default defineNuxtConfig({
   ],
   modules: [
     "nuxt-icon",
-    "nuxt-simple-sitemap"
+    "@nuxtjs/sitemap"
   ],
   runtimeConfig: {},
   features: {
     inlineStyles: false
   },
   site: {
-    url: ""
+    url: SITE.host
   },
   nitro: {
     prerender: {
