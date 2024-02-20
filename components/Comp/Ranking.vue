@@ -97,8 +97,8 @@ onBeforeUnmount(() => {
               <div v-if="h.sortable" class="d-flex align-items-center justify-content-evenly">
                 <div v-if="h.title" class="d-flex align-items-center">
                   <Icon v-if="h.icon" :class="`${h.icon_class ? h.icon_class : ''}`" :name="`${h.icon ? h.icon : ''}`" />
-                  <img v-if="h.svg" :src="h.svg" width="23px">
-                    &nbsp;
+                  <img v-if="h.svg" :src="h.svg" width="20px">
+                    &nbsp;&nbsp;
                   <small>{{ h.title }}</small>
                 </div>
                 <span class="arrows" />
