@@ -17,7 +17,8 @@ export const table_head = [
   {
     id: "is_live",
     name: "En vivo",
-    sortable: true
+    sortable: true,
+    custom_class: "live_sort"
   },
   {
     id: "streamer",
