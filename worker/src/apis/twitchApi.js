@@ -42,10 +42,32 @@ class twitchApi {
     }
   }
 
-  async getStreamsByName(array) {
+  async getUsersById(array) {
     try {
       const access_token = await this.getAccessToken();
-      const arrayString = array.filter((name, index) => array.indexOf(name) === index).map(login => `user_login=${login}`).join("&");
+      const arrayString = array.filter((str, index) => array.indexOf(str) === index).map(id => `id=${id}`).join("&");
+      const api = `${this.API_BASE}/users?${arrayString}`;
+      const headers = {
+        "Client-ID": this.TWITCH_CLIENT_ID,
+        "Authorization": "Bearer " + access_token
+      };
+
+      if(!access_token) return null;
+
+      const response = await fetch(api, {headers});
+      const { data } = await response.json();
+      return data;
+    }
+    catch (err) {
+      console.info(err);
+      return null;
+    }
+  }
+
+  async getStreamsById(array) {
+    try {
+      const access_token = await this.getAccessToken();
+      const arrayString = array.filter((str, index) => array.indexOf(str) === index).map(id => `user_id=${id}`).join("&");
       const api = `${this.API_BASE}/streams?${arrayString}`;
       const headers = {
         "Client-ID": this.TWITCH_CLIENT_ID,
