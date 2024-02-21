@@ -163,7 +163,13 @@ onBeforeUnmount(() => {
           </td>
           <td>
             <div class="d-flex flex-column align-items-center">
-              <small class="text-nowrap">{{ p.wins }}<span class="text-muted"> V</span> <span class="text-muted">|</span> {{ p.losses }}<span class="text-muted"> D</span></small>
+              <small class="text-nowrap">
+                <span class="text-positive">{{ p.wins }}</span>
+                <span class="text-muted">&nbsp;V</span>
+                <span class="text-muted">&nbsp;|&nbsp;</span>
+                <span class="text-negative">{{ p.losses }}</span>
+                <span class="text-muted">&nbsp;D</span>
+              </small>
               <div class="progress mt-2 rounded-1 " style="width: 70px; height: 10px;">
                 <div class="progress-bar bg-positive" role="progressbar" :style="{'width': (p.wins/(p.wins + p.losses) * 100) + '%' }" />
                 <div class="progress-bar bg-negative" role="progressbar" :style="{'width': (p.losses/(p.wins + p.losses) * 100) + '%' }" />
