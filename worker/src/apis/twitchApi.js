@@ -1,3 +1,5 @@
+import { ofetch } from "ofetch";
+
 class twitchApi {
 
   constructor(TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET) {
@@ -10,80 +12,58 @@ class twitchApi {
 
   async getAccessToken() {
     const oauth_url = `${this.OAUTH_BASE}/token?client_id=${this.TWITCH_CLIENT_ID}&client_secret=${this.TWITCH_CLIENT_SECRET}&grant_type=${this.GRANT_TYPE}`;
-    const response = await fetch(oauth_url, {
+    const data = await ofetch(oauth_url, {
       method: "POST",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
       }
-    });
-    const { access_token } = await response.json();
-    return access_token;
+    }).catch(() => null);
+    return data?.access_token;
   }
 
   async getUserByName(name) {
-    try {
-      const access_token = await this.getAccessToken();
-      const api = `${this.API_BASE}/users?login=${name.toLowerCase()}`;
-      const headers = {
-        "Client-ID": this.TWITCH_CLIENT_ID,
-        "Authorization": "Bearer " + access_token
-      };
+    const access_token = await this.getAccessToken();
+    const api = `${this.API_BASE}/users?login=${name.toLowerCase()}`;
+    const headers = {
+      "Client-ID": this.TWITCH_CLIENT_ID,
+      "Authorization": "Bearer " + access_token
+    };
 
-      if(!access_token) return null;
+    if(!access_token) return null;
 
-      const response = await fetch(api, {headers});
-      const { data } = await response.json();
-      return data[0];
-    }
-    catch (err) {
-      console.info(err);
-      return null;
-    }
+    const data = await ofetch(api, {headers}).catch(() => null);
+    return data?.data[0];
   }
 
   async getUsersById(array) {
-    try {
-      const access_token = await this.getAccessToken();
-      const arrayString = array.filter((str, index) => array.indexOf(str) === index).map(id => `id=${id}`).join("&");
-      const api = `${this.API_BASE}/users?${arrayString}`;
-      const headers = {
-        "Client-ID": this.TWITCH_CLIENT_ID,
-        "Authorization": "Bearer " + access_token
-      };
+    const access_token = await this.getAccessToken();
+    const arrayString = array.filter((str, index) => array.indexOf(str) === index).map(id => `id=${id}`).join("&");
+    const api = `${this.API_BASE}/users?${arrayString}`;
+    const headers = {
+      "Client-ID": this.TWITCH_CLIENT_ID,
+      "Authorization": "Bearer " + access_token
+    };
 
-      if(!access_token) return null;
+    if(!access_token) return null;
 
-      const response = await fetch(api, {headers});
-      const { data } = await response.json();
-      return data;
-    }
-    catch (err) {
-      console.info(err);
-      return null;
-    }
+    const data = await ofetch(api, {headers}).catch(() => null);
+    return data?.data;
   }
 
   async getStreamsById(array) {
-    try {
-      const access_token = await this.getAccessToken();
-      const arrayString = array.filter((str, index) => array.indexOf(str) === index).map(id => `user_id=${id}`).join("&");
-      const api = `${this.API_BASE}/streams?${arrayString}`;
-      const headers = {
-        "Client-ID": this.TWITCH_CLIENT_ID,
-        "Authorization": "Bearer " + access_token
-      };
+    const access_token = await this.getAccessToken();
+    const arrayString = array.filter((str, index) => array.indexOf(str) === index).map(id => `user_id=${id}`).join("&");
+    const api = `${this.API_BASE}/streams?${arrayString}`;
+    const headers = {
+      "Client-ID": this.TWITCH_CLIENT_ID,
+      "Authorization": "Bearer " + access_token
+    };
 
-      if(!access_token) return null;
+    if(!access_token) return null;
 
-      const response = await fetch(api, {headers});
-      const { data } = await response.json();
-      return data;
-    }
-    catch (err) {
-      console.info(err);
-      return null;
-    }
+    const data = await ofetch(api, {headers}).catch(() => null);
+    return data?.data;
   }
 }
 

@@ -1,3 +1,5 @@
+import { ofetch } from "ofetch";
+
 class riotApi {
   constructor(RIOT_KEY) {
     this.RIOT_KEY = RIOT_KEY;
@@ -25,32 +27,27 @@ class riotApi {
   }
 
   async getSummonerByPuuid(puuid, route) {
-    const response = await fetch(`https://${route}.${this.domain}/lol/summoner/v4/summoners/by-puuid/${puuid}?api_key=${this.RIOT_KEY}`);
-    const data = await response.json();
+    const data = await ofetch(`https://${route}.${this.domain}/lol/summoner/v4/summoners/by-puuid/${puuid}?api_key=${this.RIOT_KEY}`).catch(() => null);
     return data;
   }
 
   async getAccountByRiotID(name, tag, cluster) {
-    const response = await fetch(`https://${cluster}.${this.domain}/riot/account/v1/accounts/by-riot-id/${name}/${tag}?api_key=${this.RIOT_KEY}`);
-    const data = await response.json();
+    const data = await ofetch(`https://${cluster}.${this.domain}/riot/account/v1/accounts/by-riot-id/${name}/${tag}?api_key=${this.RIOT_KEY}`).catch(() => null);
     return data;
   }
 
   async getLiveGameBySummonerId(summoner_id, route) {
-    const response = await fetch(`https://${route}.${this.domain}/lol/spectator/v4/active-games/by-summoner/${summoner_id}?api_key=${this.RIOT_KEY}`);
-    const data = await response.json();
+    const data = await ofetch(`https://${route}.${this.domain}/lol/spectator/v4/active-games/by-summoner/${summoner_id}?api_key=${this.RIOT_KEY}`).catch(() => null);
     return data;
   }
 
   async getRankedDataBySummonerId(summoner_id, route) {
-    const response = await fetch(`https://${route}.${this.domain}/lol/league/v4/entries/by-summoner/${summoner_id}?api_key=${this.RIOT_KEY}`);
-    const data = await response.json();
+    const data = await ofetch(`https://${route}.${this.domain}/lol/league/v4/entries/by-summoner/${summoner_id}?api_key=${this.RIOT_KEY}`).catch(() => null);
     return data;
   }
 
   async getMatchesByPuuid(puuid, cluster, count, queueId) {
-    const response = await fetch(`https://${cluster}.${this.domain}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=${count}&api_key=${this.RIOT_KEY}&queue=${queueId ? queueId : ""}`);
-    const data = await response.json();
+    const data = await fetch(`https://${cluster}.${this.domain}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=${count}&api_key=${this.RIOT_KEY}&queue=${queueId ? queueId : ""}`).catch(() => null);
     return data;
   }
 }
