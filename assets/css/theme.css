@@ -24,8 +24,11 @@
 }
 
 .router-link-exact-active:hover,  .router-link-exact-active:focus {
-  background-color: rgba(212, 255, 144, var(--bs-bg-opacity))!important;
   color: var(--bs-dark);
+}
+
+.router-link-exact-active:hover {
+  background-color: rgba(212, 255, 144, var(--bs-bg-opacity))!important; 
 }
 
 .text-positive {
