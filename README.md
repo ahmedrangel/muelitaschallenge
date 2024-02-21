@@ -1,4 +1,4 @@
 # SoloQChallenge Demo
 
 ## Screenshots
-![image](https://github.com/ahmedrangel/soloqchallenge/assets/50090595/3760dca3-7844-4448-aa09-362035c2bd6a)
+![soloqchallenge](https://github.com/ahmedrangel/soloqchallenge/assets/50090595/c1ce2171-c648-4601-862b-ab0eccb1e34c)
