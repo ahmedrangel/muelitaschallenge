@@ -114,15 +114,15 @@ onBeforeUnmount(() => {
       </thead>
       <tbody class="border">
         <tr v-for="p of participants" :key="p.position" class="text-center align-middle">
-          <th scope="row" style="width: 20px;"><small>{{ p.position }}</small></th>
+          <th scope="row"><small>{{ p.position }}</small></th>
           <th scope="row" style="width: 40px;">
             <div class="d-flex align-items-center justify-content-center gap-1" :class="`${p.position_change > 0 ? 'text-positive' : p.position_change < 0 ? 'text-negative' : 'text-muted'}`">
               <Icon :name="`${p.position_change > 0 ? 'solar:alt-arrow-up-bold' : p.position_change < 0 ? 'solar:alt-arrow-down-bold' : 'bi:dash-lg'}`" />
               <small v-if="Math.abs(p.position_change) > 0">{{ Math.abs(p.position_change) }}</small>
             </div>
           </th>
-          <td scope="row" style="width: 20px;">
-            <span class="d-flex align-items-center" :class="`${ p.is_live ? 'live' : 'not-live'}`">
+          <td scope="row" style="width: 30px;">
+            <span class="d-flex align-items-center justify-content-center" :class="`${ p.is_live ? 'live' : 'not-live'}`">
               <Icon name="ph:circle-fill" />
             </span>
           </td>
@@ -132,14 +132,14 @@ onBeforeUnmount(() => {
               <a target="_blank" class="small" :href="`https://twitch.tv/${p.twitch_login}`">{{ p.twitch_display }}</a>
             </div>
           </td>
-          <td>
+          <td scope="row" style="width: 40px;">
             <a v-if="p.instagram" target="_blank" :href="`https://instagram.com/${p.instagram}`" class="p-2 bg-instagram rounded d-inline-flex align-items-center text-white"><Icon name="simple-icons:instagram" /></a>
           </td>
-          <td>
+          <td scope="row" style="width: 40px;">
             <a v-if="p.twitter" target="_blank" :href="`https://x.com/${p.twitter}`" class="p-2 bg-black rounded d-inline-flex align-items-center text-white"><Icon name="simple-icons:x" /></a>
           </td>
-          <td scope="row" style="width: 20px;">
-            <span class="d-flex align-items-center" :class="`${p.is_ingame ? 'ingame' : 'not-ingame'}`">
+          <td scope="row" style="width: 30px;">
+            <span class="d-flex align-items-center justify-content-center" :class="`${p.is_ingame ? 'ingame' : 'not-ingame'}`">
               <Icon name="ph:circle-fill" />
             </span>
           </td>
