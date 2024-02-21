@@ -23,6 +23,8 @@ const updateRankedData = async(env, p) => {
 
 // Iterated fetch
 const updateLolIngameStatus = async(env, p) => {
+  if (!participants[0]) return null;
+
   const _riot = new riotApi(env.RIOT_KEY);
   const route = _riot.route(region);
   const ingame_data = await _riot.getLiveGameBySummonerId(p.id_summoner, route);
@@ -103,13 +105,15 @@ export const updateGeneralData = async(env) => {
   }
 
   const sorted = await sortRankedData(env);
-  await updateTwitchLiveStatus(env, twitch_ids);
-  await updateTwitchData(env, twitch_ids);
 
-  await env.PARTICIPANTS.prepare("UPDATE control SET last_updated = ? WHERE id = ?")
-    .bind(new Date().toISOString(), 1).run();
+  if (sorted[0]) {
+    await updateTwitchLiveStatus(env, twitch_ids);
+    await updateTwitchData(env, twitch_ids);
+    await env.PARTICIPANTS.prepare("UPDATE control SET last_updated = ? WHERE id = ?")
+      .bind(new Date().toISOString(), 1).run();
 
-  return sorted;
+    return sorted;
+  }
 };
 
 /*
