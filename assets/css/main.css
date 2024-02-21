@@ -18,6 +18,10 @@ img {
   user-select: none;
 }
 
+.icon {
+  min-width: 1em;
+}
+
 @media only screen and (width <= 767px) {
   .img-profile {
     height: 36px;

@@ -16,11 +16,6 @@
   --bs-body-font-weight: 300;
 }
 
-span, small, div, a {
-  vertical-align: middle;
-  line-height: 1.5rem;
-}
-
 .router-link-exact-active {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-tertiary-rgb),var(--bs-bg-opacity))!important;
