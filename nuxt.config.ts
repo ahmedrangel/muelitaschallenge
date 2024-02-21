@@ -24,7 +24,8 @@ export default defineNuxtConfig({
   ],
   modules: [
     "nuxt-icon",
-    "@nuxtjs/sitemap"
+    "@nuxtjs/sitemap",
+    "@nuxtjs/google-fonts"
   ],
   runtimeConfig: {},
   features: {
@@ -49,5 +50,12 @@ export default defineNuxtConfig({
   routeRules: {
     "/": { sitemap: { priority: 1 } },
     "/*/**": { sitemap: { priority: 0.8, lastmod: new Date().toISOString() } }
+  },
+  googleFonts: {
+    display: "swap",
+    download: true,
+    families: {
+      "Mukta": [300, 400, 500, 600, 700],
+    },
   }
 });

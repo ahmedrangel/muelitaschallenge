@@ -45,7 +45,7 @@ beforeEach(({ name }) => {
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" />
         </div>
         <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 gap-1 fw-bold">
+          <ul class="navbar-nav justify-content-end flex-grow-1 gap-1 fw-bold">
             <template v-for="(tab, i) of tabs" :key="i">
               <li class="nav-item px-1" data-bs-dismiss="offcanvas">
                 <NuxtLink class="nav-link d-flex align-items-center gap-1 position-relative overflow-hidden rounded px-3" aria-current="page" :to="tab.route">
