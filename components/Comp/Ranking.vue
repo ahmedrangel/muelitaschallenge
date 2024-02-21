@@ -88,8 +88,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div>
-    <table class="table table-striped table-borderless rounded overflow-hidden">
+  <div class="overflow-auto">
+    <table class="table table-striped table-borderless overflow-hidden rounded">
       <thead>
         <tr style="height: 40px;" class="align-middle text-center">
           <template v-for="(h, i) of table_head" :key="i">
