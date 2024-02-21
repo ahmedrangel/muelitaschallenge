@@ -16,7 +16,7 @@
   --bs-body-font-weight: 300;
 }
 
-span, small {
+span, small, div, a {
   vertical-align: middle;
   line-height: 1.5rem;
 }
