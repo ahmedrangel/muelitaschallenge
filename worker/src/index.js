@@ -16,29 +16,27 @@ router.post("/add", async (req, env) => {
   const cluster = _riot.cluster(region);
   try {
     const { riot_name, riot_tag, key, twitch, twitter, instagram } = await req.json();
-    if (key === env.POST_KEY) {
-      if (!riot_name || !riot_tag || !twitch) return new JsonResponse({ status: "Bad Request", status_code: 400 });
-      // League of legends
-      const { puuid } = await _riot.getAccountByRiotID(riot_name, riot_tag, cluster);
-      const summoner = await _riot.getSummonerByPuuid(puuid, route);
-      const lol_picture = summoner.profileIconId;
-      const id_summoner = summoner.id;
-      // Twitch
-      const twitch_data = await _twitch.getUserByName(twitch);
-      const twitch_id = twitch_data.id;
-      const twitch_login = twitch_data.login;
-      const twitch_display = twitch_data.display_name;
-      const twitch_picture = twitch_data.profile_image_url.replace("https://static-cdn.jtvnw.net/","");
-      // Add DB
-      await env.PARTICIPANTS.prepare(
-        `
+    if (key !== env.POST_KEY) return new JsonResponse({ status: "Forbidden", status_code: 403 });
+    if (!riot_name || !riot_tag || !twitch) return new JsonResponse({ status: "Bad Request", status_code: 400 });
+    // League of legends
+    const { puuid } = await _riot.getAccountByRiotID(riot_name, riot_tag, cluster);
+    const summoner = await _riot.getSummonerByPuuid(puuid, route);
+    const lol_picture = summoner.profileIconId;
+    const id_summoner = summoner.id;
+    // Twitch
+    const twitch_data = await _twitch.getUserByName(twitch);
+    const twitch_id = twitch_data.id;
+    const twitch_login = twitch_data.login;
+    const twitch_display = twitch_data.display_name;
+    const twitch_picture = twitch_data.profile_image_url.replace("https://static-cdn.jtvnw.net/","");
+    // Add DB
+    await env.PARTICIPANTS.prepare(
+      `
         INSERT OR IGNORE INTO participants (puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter, instagram, twitch_id, control_id)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `
-      ).bind(puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter ? twitter : "", instagram ? instagram : "", twitch_id, 1).run();
-      return new JsonResponse({ puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter: twitter ? twitter : "", instagram: instagram ? instagram : ""});
-    }
-    return new JsonResponse({ status: "Forbidden", status_code: 403 });
+    ).bind(puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter ? twitter : "", instagram ? instagram : "", twitch_id, 1).run();
+    return new JsonResponse({ puuid, id_summoner, riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter: twitter ? twitter : "", instagram: instagram ? instagram : ""});
   }
   catch (err) {
     return new JsonResponse({ status: "Bad Request", status_code: 400 });
@@ -63,16 +61,37 @@ router.get("/participants", async (req, env) => {
   return new JsonResponse(data);
 });
 
-router.get("/update-general", async (req, env) => {
-  return new JsonResponse(await updateGeneralData(env));
+router.post("/update-general", async (req, env) => {
+  try {
+    const { key } = await req.json();
+    if (key !== env.POST_KEY) return new JsonResponse({ status: "Forbidden", status_code: 403 });
+    return new JsonResponse(await updateGeneralData(env));
+  }
+  catch (err) {
+    return new JsonResponse({ status: "Bad Request", status_code: 400 });
+  }
 });
 
-router.get("/update-accounts", async (req, env) => {
-  return new JsonResponse(await updateAccountsData(env));
+router.post("/update-lol-icons", async (req, env) => {
+  try {
+    const { key } = await req.json();
+    if (key !== env.POST_KEY) return new JsonResponse({ status: "Forbidden", status_code: 403 });
+    return new JsonResponse(await updateAccountsData(env));
+  }
+  catch (err) {
+    return new JsonResponse({ status: "Bad Request", status_code: 400 });
+  }
 });
 
-router.get("/reset-position-change", async (req, env) => {
-  return new JsonResponse(await resetPositionChange(env));
+router.post("/reset-position-change", async (req, env) => {
+  try {
+    const { key } = await req.json();
+    if (key !== env.POST_KEY) return new JsonResponse({ status: "Forbidden", status_code: 403 });
+    return new JsonResponse(await resetPositionChange(env));
+  }
+  catch (err) {
+    return new JsonResponse({ status: "Bad Request", status_code: 400 });
+  }
 });
 
 router.all("*", () => new JsResponse("Not Found.", { status: 404 }));
