@@ -133,10 +133,10 @@ onBeforeUnmount(() => {
             </div>
           </td>
           <td>
-            <a v-if="p.instagram" target="_blank" :href="`https://instagram.com/${p.instagram}`" class="p-2 bg-instagram rounded d-inline-flex align-items-center small text-white"><Icon name="simple-icons:instagram" /></a>
+            <a v-if="p.instagram" target="_blank" :href="`https://instagram.com/${p.instagram}`" class="p-2 bg-instagram rounded d-inline-flex align-items-center text-white"><Icon name="simple-icons:instagram" /></a>
           </td>
           <td>
-            <a v-if="p.twitter" target="_blank" :href="`https://x.com/${p.twitter}`" class="p-2 bg-black rounded d-inline-flex align-items-center small text-white"><Icon name="simple-icons:x" /></a>
+            <a v-if="p.twitter" target="_blank" :href="`https://x.com/${p.twitter}`" class="p-2 bg-black rounded d-inline-flex align-items-center text-white"><Icon name="simple-icons:x" /></a>
           </td>
           <td scope="row" style="width: 20px;">
             <span class="d-flex align-items-center" :class="`${p.is_ingame ? 'ingame' : 'not-ingame'}`">
