@@ -3,7 +3,7 @@ import riotApi, { eloValues } from "../apis/riotApi";
 import { fixRank } from "../utils/helpers";
 
 const region = "lan";
-const participants = [];
+let participants = [];
 
 // Iterated fetch
 const updateRankedData = async(env, p) => {
@@ -92,6 +92,7 @@ export const updateGeneralData = async(env) => {
   const { results } = await env.PARTICIPANTS.prepare("SELECT id_summoner, twitch_id, position, position_change from participants").all();
   if (!results[0]) return null;
 
+  participants = [];
   const twitch_ids = [];
 
   // Update ranked data
