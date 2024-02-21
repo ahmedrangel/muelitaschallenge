@@ -40,7 +40,7 @@ beforeEach(({ name }) => {
         <span width="45">SoloQ Challenge Demo</span>
       </div>
       <div id="offcanvasNavbar" class="offcanvas offcanvas-start bg-secondary" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header px-5 pt-4 pb-0">
+        <div class="offcanvas-header px-4 pt-4 pb-0">
           <span width="45">SoloQ Challenge Demo</span>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" />
         </div>
