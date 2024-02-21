@@ -6,14 +6,11 @@ th.sortable {
 th.sortable .arrows {
   width: 16px;
   filter: invert(100%) sepia(0%) saturate(7474%) hue-rotate(57deg) brightness(109%) contrast(101%);
+  content: url("/images/sort-both.svg");
 }
 
 th.sortable:hover .arrows, th.sortable.asc .arrows, th.sortable.desc .arrows {
   filter: invert(4%) sepia(41%) saturate(3713%) hue-rotate(209deg) brightness(99%) contrast(96%);
-}
-
-th.sortable .arrows {
-  content: url("/images/sort-both.svg");
 }
 
 th.sortable.desc .arrows {

@@ -11,6 +11,6 @@ const icon_version = data.value?.lol_icon_version;
     <!-- Cantidad de participantes -->
     <CompParticipantsCounter :data="participants" :last-updated="last_updated" />
     <!-- Tabla de clasificación -->
-    <CompRanking v-if="participants" :data="participants" :icon-version="icon_version"/>
+    <CompRanking v-if="participants" :data="participants" :icon-version="icon_version" />
   </main>
 </template>

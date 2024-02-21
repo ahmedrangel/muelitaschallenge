@@ -9,7 +9,7 @@
   --bs-secondary-rgb: 41, 51, 74;
   --bs-tertiary: #a3dd46;
   --bs-tertiary-rgb: 163, 221, 70;
-  --positive: #99ff99;
+  --positive: #9f9;
   --negative: #ff7583;
   --bs-body-font-family: "Mukta";
   --bs-body-font-size: 1.12rem;
@@ -18,6 +18,7 @@
 
 .router-link-exact-active {
   --bs-bg-opacity: 1;
+
   background-color: rgba(var(--bs-tertiary-rgb),var(--bs-bg-opacity))!important;
   color: var(--bs-dark);
 }
