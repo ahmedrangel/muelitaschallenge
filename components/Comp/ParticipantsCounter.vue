@@ -11,7 +11,7 @@ const props = defineProps({
       <Icon name="fa6-solid:user-group" />
       <span>{{ props.data ? props.data.length : 0 }} participantes</span>
     </div>
-    <div class="d-flex gap-1 align-items-center text-nowrap">
+    <div v-if="props.lastUpdated" class="d-flex gap-1 align-items-center text-nowrap">
       <Icon name="ph:clock-clockwise-bold" />
       <span>Actualizado:</span>
       <span>hace {{ getTimeUnitsFromISODate(props.lastUpdated) }}</span>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { data: data } = await useFetch("/api/participants") as Record<string, any>;
-const { participants, last_updated } = data.value;
+const participants = data.value?.participants;
+const last_updated = data.value?.last_updated;
 </script>
 
 <template>
