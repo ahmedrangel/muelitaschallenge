@@ -8,7 +8,7 @@ export default defineEventHandler(async () => {
 
   if (!results[0]) return null;
 
-  const control = await DB.prepare("SELECT last_updated FROM control WHERE id = ?").bind(1).first();
+  const control = await DB.prepare("SELECT last_updated, lol_icon_version FROM control WHERE id = ?").bind(1).first();
 
   const sorted = results.sort((a: Record<string, number>, b: Record<string, number>) => {
     if (!a.position || !b.position) {
@@ -18,6 +18,6 @@ export default defineEventHandler(async () => {
     return a.position - b.position;
   });
 
-  const data = { participants: sorted, last_updated: control.last_updated };
+  const data = { participants: sorted, last_updated: control.last_updated, lol_icon_version: control.lol_icon_version };
   return data;
 });

@@ -11,6 +11,7 @@ const updateLolIcon = async(env, puuid) => {
     .bind(summoner_data.profileIconId, puuid).run();
 };
 
+
 // Export
 export const updateAccountsData = async(env) => {
   const { results } = await env.PARTICIPANTS.prepare("SELECT puuid from participants").all();

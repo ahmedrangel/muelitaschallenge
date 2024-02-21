@@ -1,9 +1,11 @@
 <script setup lang="ts">
 const props = defineProps({
   data: { type: Object, required: true },
+  iconVersion: { type: String, required: true }
 });
 
 const participants = ref(props.data);
+const icon_version = props.iconVersion;
 
 const sort = (type: string, order: string) => {
   const sorters: Record<string, (a: any, b: any) => number> = {
@@ -145,7 +147,7 @@ onBeforeUnmount(() => {
           </td>
           <td class="text-start">
             <div class="d-flex align-items-center gap-2">
-              <img class="rounded-circle img-profile" :src="`https://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/${p.lol_picture}.png`">
+              <img class="rounded-circle img-profile" :src="`https://ddragon.leagueoflegends.com/cdn/${icon_version}/img/profileicon/${p.lol_picture}.png`">
               <a target="_blank" class="small text-nowrap" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`">{{ p.riot_name }} #{{ p.riot_tag }}</a>
             </div>
           </td>
