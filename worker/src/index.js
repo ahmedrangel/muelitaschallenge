@@ -5,7 +5,7 @@ import twitchApi from "./apis/twitchApi";
 import riotApi from "./apis/riotApi";
 import { updateGeneralData } from "./crons/update-general-data";
 import { updateAccountsData } from "./crons/update-accounts-data";
-import { updateLolIconVersion } from "./crons/reset-position-change";
+import { resetPositionChange, updateLolIconVersion } from "./crons/reset-position-change";
 
 const router = Router();
 const region = "lan";
@@ -91,6 +91,7 @@ router.post("/reset-position-change", async (req, env) => {
     return new JsonResponse(await resetPositionChange(env));
   }
   catch (err) {
+    console.info(err);
     return new JsonResponse({ status: "Bad Request", status_code: 400 });
   }
 });
