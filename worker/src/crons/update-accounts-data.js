@@ -20,6 +20,7 @@ export const updateAccountsData = async(env) => {
   // Update data
   for (const p of results) {
     await updateLolIcon(env, p.puuid);
+    await new Promise(resolve => setTimeout(resolve, 100));
   }
 };
 
