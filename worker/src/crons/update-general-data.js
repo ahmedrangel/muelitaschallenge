@@ -102,7 +102,7 @@ export const updateGeneralData = async(env) => {
     twitch_ids.push(p.twitch_id);
     await updateRankedData(env, p);
     await updateLolIngameStatus(env, p);
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 150));
   }
 
   const sorted = await sortRankedData(env);
