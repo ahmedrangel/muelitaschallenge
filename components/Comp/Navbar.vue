@@ -32,7 +32,7 @@ beforeEach(({ name }) => {
 
 <template>
   <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-secondary shadow-lg" data-bs-theme="dark">
-    <div class="container-fluid container-md">
+    <div class="container-xl px-xl-5">
       <button class="navbar-toggler border-0 rounded-pill" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" />
       </button>
