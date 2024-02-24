@@ -14,18 +14,18 @@
   --bs-body-font-weight: 300;
 }
 
-.router-link-exact-active {
+nav .router-link-exact-active {
   --bs-bg-opacity: 1;
 
   background-color: rgba(var(--bs-tertiary-rgb),var(--bs-bg-opacity))!important;
   color: var(--bs-dark);
 }
 
-.router-link-exact-active:hover,  .router-link-exact-active:focus {
+nav .router-link-exact-active:hover, nav .router-link-exact-active:focus {
   color: var(--bs-dark);
 }
 
-.router-link-exact-active:hover {
+nav .router-link-exact-active:hover {
   background-color: rgba(212, 255, 144, var(--bs-bg-opacity))!important; 
 }
 
