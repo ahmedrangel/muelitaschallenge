@@ -1,8 +1,8 @@
 :root, [data-bs-theme="dark"] {
   --bs-primary: #3a4052;
   --bs-primary-rgb: 58, 64, 82;
-  --bs-dark: var(--bs-body-bg);
-  --bs-dark-rgb: var(--bs-body-bg-rgb);
+  --bs-dark: #091428;
+  --bs-dark-rgb: 9, 20, 40;
   --bs-secondary: #29334a;
   --bs-secondary-rgb: 41, 51, 74;
   --bs-tertiary: #a3dd46;
@@ -101,5 +101,5 @@ main ::-webkit-scrollbar-track {
 }
 
 #layout {
-  background-color: #091428;
+  background-color: var(--bs-dark);
 }

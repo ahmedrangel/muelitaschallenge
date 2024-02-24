@@ -132,7 +132,7 @@ const remainMatchesToday = (total: number) => {
         <tr v-for="p of participants" :key="p.position" class="text-center align-middle">
           <th scope="row"><small>{{ p.position }}</small></th>
           <th scope="row" style="width: 40px;">
-            <div class="d-flex align-items-center justify-content-center gap-1" :class="`${p.position_change > 0 ? 'text-positive' : p.position_change < 0 ? 'text-negative' : 'text-muted'}`">
+            <div class="d-flex align-items-center justify-content-center gap-1 px-1" :class="`${p.position_change > 0 ? 'text-positive' : p.position_change < 0 ? 'text-negative' : 'text-muted'}`">
               <Icon :name="`${p.position_change > 0 ? 'solar:alt-arrow-up-bold' : p.position_change < 0 ? 'solar:alt-arrow-down-bold' : 'bi:dash-lg'}`" />
               <small v-if="Math.abs(p.position_change) > 0">{{ Math.abs(p.position_change) }}</small>
             </div>
@@ -175,7 +175,7 @@ const remainMatchesToday = (total: number) => {
             </div>
           </td>
           <td>
-            <div class="text-decoration-underline" :class="{ 'underline-negative': remainMatchesToday(p.wins + p.losses) <= 0 }" data-bs-toggle="popover" title="Partidas" :data-bs-content="`Partidas de: <strong>${p.twitch_display}</strong><br>Total jugadas: <strong>${p.wins + p.losses}</strong><br>Restantes hoy: <b ${remainMatchesToday(p.wins + p.losses) <= 0 ? 'class=\'text-negative\'' : ''}'>${remainMatchesToday(p.wins + p.losses)}</b>`">
+            <div class="text-decoration-underline" :class="{ 'underline-negative': remainMatchesToday(p.wins + p.losses) <= 0 }" data-bs-toggle="popover" :title="p.twitch_display" :data-bs-content="`Total jugadas: <strong>${p.wins + p.losses}</strong><br>Restantes hoy: <b ${remainMatchesToday(p.wins + p.losses) <= 0 ? 'class=\'text-negative\'' : ''}'>${remainMatchesToday(p.wins + p.losses)}</b>`">
               <small role="button">{{ p.wins + p.losses }}</small>
             </div>
           </td>
