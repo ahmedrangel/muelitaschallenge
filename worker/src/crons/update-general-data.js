@@ -102,7 +102,7 @@ export const updateGeneralData = async(env) => {
   let index = 0;
   // Update ranked data
   for (const p of results) {
-    if (index === 19) {
+    if (index === 9) {
       await new Promise(resolve => setTimeout(resolve, 1100));
       index = 0;
     }
