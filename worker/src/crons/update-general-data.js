@@ -99,13 +99,19 @@ export const updateGeneralData = async(env) => {
   participants = [];
   const twitch_ids = [];
 
+  let index = 0;
   // Update ranked data
   for (const p of results) {
+    if (index === 19) {
+      await new Promise(resolve => setTimeout(resolve, 1100));
+      index = 0;
+    }
     twitch_ids.push(p.twitch_id);
     await updateRankedData(env, p);
     await new Promise(resolve => setTimeout(resolve, 50));
     await updateLolIngameStatus(env, p);
-    await new Promise(resolve => setTimeout(resolve, 120));
+    await new Promise(resolve => setTimeout(resolve, 100));
+    index++;
   }
 
   const sorted = await sortRankedData(env);

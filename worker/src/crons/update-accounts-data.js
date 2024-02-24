@@ -22,6 +22,8 @@ export const updateAccountsData = async(env) => {
     await updateLolIcon(env, p.puuid);
     await new Promise(resolve => setTimeout(resolve, 100));
   }
+
+  return "Updated";
 };
 
 /*
