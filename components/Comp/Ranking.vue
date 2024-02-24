@@ -175,7 +175,7 @@ const remainMatchesToday = (total: number) => {
             </div>
           </td>
           <td>
-            <div class="text-decoration-underline" :class="{ 'underline-negative': remainMatchesToday(p.wins + p.losses) <= 0 }" data-bs-toggle="popover" :title="p.twitch_display" :data-bs-content="`Total jugadas: <strong>${p.wins + p.losses}</strong><br>Restantes hoy: <b ${remainMatchesToday(p.wins + p.losses) <= 0 ? 'class=\'text-negative\'' : ''}'>${remainMatchesToday(p.wins + p.losses)}</b>`">
+            <div v-if="p.wins && p.losses" class="text-decoration-underline" :class="{ 'underline-negative': remainMatchesToday(p.wins + p.losses) <= 0 }" data-bs-toggle="popover" :title="p.twitch_display" :data-bs-content="`Total jugadas: <strong>${p.wins + p.losses}</strong><br>Restantes hoy: <b ${remainMatchesToday(p.wins + p.losses) <= 0 ? 'class=\'text-negative\'' : ''}'>${remainMatchesToday(p.wins + p.losses)}</b>`">
               <small role="button">{{ p.wins + p.losses }}</small>
             </div>
           </td>
