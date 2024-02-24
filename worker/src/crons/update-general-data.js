@@ -10,15 +10,17 @@ const updateRankedData = async(env, p) => {
   const _riot = new riotApi(env.RIOT_KEY);
   const route = _riot.route(region);
   const ranked_data = await _riot.getRankedDataBySummonerId(p.id_summoner, route);
-  const soloq = ranked_data.filter(item => item.queueType === "RANKED_SOLO_5x5")[0];
+  if (ranked_data[0]) {
+    const soloq = ranked_data.filter(item => item.queueType === "RANKED_SOLO_5x5")[0];
 
-  if (soloq) {
-    participants.push({ id_summoner: p.id_summoner, wins: soloq.wins, losses: soloq.losses, lp: soloq.leaguePoints, elo: soloq.tier, tier: soloq.rank, position: p.position, position_change: p.position_change });
-    await env.PARTICIPANTS.prepare("UPDATE participants SET wins = ?, losses = ?, lp = ?, elo = ?, tier = ? WHERE id_summoner = ?")
-      .bind(soloq.wins, soloq.losses, soloq.leaguePoints, soloq.tier.toLowerCase(), fixRank(soloq.tier, soloq.rank), p.id_summoner).run();
+    if (soloq) {
+      participants.push({ id_summoner: p.id_summoner, wins: soloq.wins, losses: soloq.losses, lp: soloq.leaguePoints, elo: soloq.tier, tier: soloq.rank, position: p.position, position_change: p.position_change });
+      await env.PARTICIPANTS.prepare("UPDATE participants SET wins = ?, losses = ?, lp = ?, elo = ?, tier = ? WHERE id_summoner = ?")
+        .bind(soloq.wins, soloq.losses, soloq.leaguePoints, soloq.tier.toLowerCase(), fixRank(soloq.tier, soloq.rank), p.id_summoner).run();
+    }
+
+    return participants;
   }
-
-  return participants;
 };
 
 // Iterated fetch
@@ -101,8 +103,9 @@ export const updateGeneralData = async(env) => {
   for (const p of results) {
     twitch_ids.push(p.twitch_id);
     await updateRankedData(env, p);
+    await new Promise(resolve => setTimeout(resolve, 50));
     await updateLolIngameStatus(env, p);
-    await new Promise(resolve => setTimeout(resolve, 150));
+    await new Promise(resolve => setTimeout(resolve, 120));
   }
 
   const sorted = await sortRankedData(env);
