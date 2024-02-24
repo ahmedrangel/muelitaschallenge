@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     "~/assets/css/transitions.css",
     "~/assets/css/theme.css",
     "~/assets/css/tables.css",
+    "~/assets/css/popover.css"
   ],
   modules: [
     "nuxt-icon",

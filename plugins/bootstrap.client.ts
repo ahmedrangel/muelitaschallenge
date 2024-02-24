@@ -49,7 +49,7 @@ class Bootstrap {
 
   initializePopover () {
     const popoverList = document.querySelectorAll("[data-bs-toggle=\"popover\"]");
-    [...popoverList].map(e => new Popover(e, { trigger: "click hover", placement: "top", html: true }));
+    [...popoverList].map(e => new Popover(e, { trigger: "hover", placement: "top", html: true }));
   }
 
   showOffcanvas (id: HTMLElement) {

@@ -89,11 +89,23 @@ onMounted(() => {
 onBeforeUnmount(() => {
   sorterHandler("remove");
 });
+
+const matches_per_day = 8;
+const date_init = new Date("2024-01-24T00:00:00-06:00");
+const now = new Date();
+const nowInCDMX = new Date(now.toLocaleString("en-US", { timeZone: "America/Mexico_City" }));
+
+const remainMatchesToday = (total: number) => {
+  const daysPassed = Math.floor((Number(nowInCDMX) - Number(date_init)) / (1000 * 3600 * 24)) + 1; // Calcular días pasados desde la fecha inicial
+  const totalAvailableMatches = daysPassed * matches_per_day; // Calcular el total de matches disponibles hasta hoy
+  const remainingMatches = totalAvailableMatches - total; // Calcular los matches que quedan hoy
+  return 999; // remainingMatches;
+};
 </script>
 
 <template>
   <div class="overflow-auto">
-    <table class="table table-striped table-borderless overflow-hidden rounded">
+    <table class="table table-striped table-borderless overflow-hidden rounded mb-1">
       <thead>
         <tr style="height: 40px;" class="align-middle text-center">
           <template v-for="(h, i) of table_head" :key="i">
@@ -163,7 +175,7 @@ onBeforeUnmount(() => {
             </div>
           </td>
           <td>
-            <div class="text-decoration-underline" data-bs-toggle="popover" title="Partidas" :data-bs-content="`<b>${p.twitch_display}</b> ha jugado <b>${p.wins + p.losses}</b> partidas en total y tiene un límite de <b>${0}</b> partidas restantes para jugar hoy.`">
+            <div class="text-decoration-underline" :class="{ 'underline-negative': remainMatchesToday(p.wins + p.losses) <= 0 }" data-bs-toggle="popover" title="Partidas" :data-bs-content="`Partidas de: <strong>${p.twitch_display}</strong><br>Total jugadas: <strong>${p.wins + p.losses}</strong><br>Restantes hoy: <b ${remainMatchesToday(p.wins + p.losses) <= 0 ? 'class=\'text-negative\'' : ''}'>${remainMatchesToday(p.wins + p.losses)}</b>`">
               <small role="button">{{ p.wins + p.losses }}</small>
             </div>
           </td>
@@ -176,7 +188,7 @@ onBeforeUnmount(() => {
                 <span class="text-negative">{{ p.losses }}</span>
                 <span class="text-muted">&nbsp;D</span>
               </small>
-              <div class="progress mt-2 rounded-1 " style="width: 70px; height: 10px;">
+              <div class="progress mt-2 rounded-1 " style="width: 70px; height: 8px;">
                 <div class="progress-bar bg-positive" role="progressbar" :style="{'width': (p.wins/(p.wins + p.losses) * 100) + '%' }" />
                 <div class="progress-bar bg-negative" role="progressbar" :style="{'width': (p.losses/(p.wins + p.losses) * 100) + '%' }" />
               </div>

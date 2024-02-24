@@ -20,18 +20,18 @@ onBeforeMount(() => {
 
 <template>
   <div class="mb-1">
-    <div class="d-lg-flex d-block align-items-center justify-content-between gap-3">
-      <div class="d-flex gap-1 align-items-center text-nowrap">
-        <Icon name="fa6-solid:user-group" />
-        <span>{{ props.data ? props.data.length : 0 }} participantes</span>
-      </div>
-    </div>
-    <div class="d-lg-flex d-block align-items-center justify-content-between gap-3">
-      <div v-if="props.lastUpdated" class="d-flex gap-1 align-items-center text-nowrap">
+    <div class="d-lg-flex d-block align-items-center justify-content-end gap-3">
+      <div class="d-flex gap-1 align-items-center text-nowrap text-muted">
         <Icon name="ph:clock-bold" />
         <span>Hora server:
           <ClientOnly>{{ serverTime }}</ClientOnly>
         </span>
+      </div>
+    </div>
+    <div class="d-lg-flex d-block align-items-center justify-content-between gap-3">
+      <div class="d-flex gap-1 align-items-center text-nowrap">
+        <Icon name="fa6-solid:user-group" />
+        <span>{{ props.data ? props.data.length : 0 }} participantes</span>
       </div>
       <div v-if="props.lastUpdated" class="d-flex gap-1 align-items-center text-nowrap">
         <Icon name="ph:clock-clockwise-bold" />

@@ -1,8 +1,6 @@
 :root, [data-bs-theme="dark"] {
   --bs-primary: #3a4052;
   --bs-primary-rgb: 58, 64, 82;
-  --bs-body-bg: #091428;
-  --bs-body-bg-rgb: 9, 20, 40;
   --bs-dark: var(--bs-body-bg);
   --bs-dark-rgb: var(--bs-body-bg-rgb);
   --bs-secondary: #29334a;
@@ -36,7 +34,7 @@
 }
 
 .text-negative {
-  color: var(--negative);
+  color: var(--negative)!important;
 }
 
 .bg-positive {
@@ -96,4 +94,12 @@ main ::-webkit-scrollbar-track {
 
 *::-webkit-scrollbar-thumb:hover {
   background-color: var(--bs-tertiary);
+}
+
+.bg-footer {
+  background-color: #07090d;
+}
+
+#layout {
+  background-color: #091428;
 }
