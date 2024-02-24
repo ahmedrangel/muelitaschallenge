@@ -82,6 +82,8 @@ const sorterHandler = (type: string) => {
 
 onMounted(() => {
   sorterHandler("add");
+  const { $bootstrap } = useNuxtApp();
+  $bootstrap.initializePopover();
 });
 
 onBeforeUnmount(() => {
@@ -161,7 +163,9 @@ onBeforeUnmount(() => {
             </div>
           </td>
           <td>
-            <small>{{ p.wins + p.losses }}</small>
+            <div class="text-decoration-underline" data-bs-toggle="popover" title="Partidas" :data-bs-content="`<b>${p.twitch_display}</b> ha jugado <b>${p.wins + p.losses}</b> partidas en total y tiene un límite de <b>${0}</b> partidas restantes para jugar hoy.`">
+              <small role="button">{{ p.wins + p.losses }}</small>
+            </div>
           </td>
           <td>
             <div class="d-flex flex-column align-items-center">
