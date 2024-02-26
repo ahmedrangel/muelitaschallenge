@@ -7,14 +7,6 @@ export const updateLolIconVersion = async(env) => {
   return { lol_icon_version: versions?.n?.profileicon };
 };
 
-export const resetPositionChange = async(env) => {
-  await env.PARTICIPANTS.prepare("UPDATE participants SET position_change = 0 WHERE position_change IS NOT 0").run();
-  // Update Lol Icon Version
-  await updateLolIconVersion(env);
-
-  return "Reset";
-};
-
 /*
  * Requests amount:
  * Update Lol Icon Version (1)

@@ -5,7 +5,7 @@ import twitchApi from "./apis/twitchApi";
 import riotApi from "./apis/riotApi";
 import { updateGeneralData } from "./crons/update-general-data";
 import { updateAccountsData } from "./crons/update-accounts-data";
-import { resetPositionChange, updateLolIconVersion } from "./crons/reset-position-change";
+import { updateLolIconVersion } from "./crons/update-lol-icon-version";
 
 const router = Router();
 const region = "lan";
@@ -88,7 +88,8 @@ router.post("/reset-position-change", async (req, env) => {
   try {
     const { key } = await req.json();
     if (key !== env.POST_KEY) return new JsonResponse({ status: "Forbidden", status_code: 403 });
-    return new JsonResponse(await resetPositionChange(env));
+    await env.PARTICIPANTS.prepare("UPDATE participants SET position_change = 0 WHERE position_change IS NOT 0").run();
+    return new JsResponse("Reseted");
   }
   catch (err) {
     console.info(err);
@@ -112,7 +113,7 @@ export default {
       await updateGeneralData(env);
       break;
     case "0 6 * * *":
-      await resetPositionChange(env);
+      await updateLolIconVersion(env);
       break;
     }
   }

@@ -1,6 +1,6 @@
 import twitchApi from "../apis/twitchApi";
 import riotApi, { eloValues } from "../apis/riotApi";
-import { fixRank } from "../utils/helpers";
+import { fixRank, resetPositionChange } from "../utils/helpers";
 
 const region = "lan";
 let participants = [];
@@ -115,6 +115,9 @@ export const updateGeneralData = async(env) => {
   }
 
   const sorted = await sortRankedData(env);
+
+  // Reset position_change if hour is 0 and minutes < 10
+  await resetPositionChange(env);
 
   if (sorted[0]) {
     await updateTwitchLiveStatus(env, twitch_ids);
