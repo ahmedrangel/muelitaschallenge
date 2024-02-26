@@ -14,6 +14,6 @@ export const resetPositionChange = async(env) => {
   const minutes = nowInCDMX.getMinutes();
   if (hours === 0 && minutes < 10) {
     await env.PARTICIPANTS.prepare("UPDATE participants SET position_change = 0 WHERE position_change IS NOT 0").run();
+    console.info("position change reseted");
   }
-  console.info("position change reseted");
 };
