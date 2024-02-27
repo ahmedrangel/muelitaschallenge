@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const props = defineProps({
-  data: { type: Object, required: true },
-  iconVersion: { type: String, required: true }
+  data: { type: Object, required: true }
 });
 
 const participants = ref(props.data);
