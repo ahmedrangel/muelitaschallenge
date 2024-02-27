@@ -82,6 +82,7 @@ onMounted(() => {
   sorterHandler("add");
   const { $bootstrap } = useNuxtApp();
   $bootstrap.initializePopover();
+  $bootstrap.initializeTooltip();
 });
 
 onBeforeUnmount(() => {
@@ -136,7 +137,7 @@ const remainMatchesToday = (total: number) => {
             </div>
           </th>
           <td scope="row" style="width: 30px;">
-            <span class="d-flex align-items-center justify-content-center" :class="`${ p.is_live ? 'live' : 'not-live'}`">
+            <span class="d-flex align-items-center justify-content-center" :class="`${ p.is_live ? 'live' : 'not-live'}`" data-bs-toggle="tooltip" :title="`${p.is_live ? '¡En directo!' : ''}`">
               <Icon name="ph:circle-fill" />
             </span>
           </td>
@@ -153,7 +154,7 @@ const remainMatchesToday = (total: number) => {
             <a v-if="p.twitter" target="_blank" :href="`https://x.com/${p.twitter}`" class="p-2 bg-black rounded d-inline-flex align-items-center text-white"><Icon name="simple-icons:x" /></a>
           </td>
           <td scope="row" style="width: 30px;">
-            <span class="d-flex align-items-center justify-content-center" :class="`${p.is_ingame ? 'ingame' : 'not-ingame'}`">
+            <span class="d-flex align-items-center justify-content-center" :class="`${p.is_ingame ? 'ingame' : 'not-ingame'}`" data-bs-toggle="tooltip" :title="`${p.is_ingame ? '¡En partida!' : ''}`">
               <Icon name="ph:circle-fill" />
             </span>
           </td>
