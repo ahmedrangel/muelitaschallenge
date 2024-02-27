@@ -5,7 +5,6 @@ const props = defineProps({
 });
 
 const participants = ref(props.data);
-const icon_version = props.iconVersion;
 
 const sort = (type: string, order: string) => {
   const sorters: Record<string, (a: any, b: any) => number> = {
@@ -161,7 +160,7 @@ const remainMatchesToday = (total: number) => {
           </td>
           <td class="text-start">
             <div class="d-flex align-items-center gap-2">
-              <img class="rounded-circle img-profile" :src="`https://ddragon.leagueoflegends.com/cdn/${icon_version}/img/profileicon/${p.lol_picture}.png`">
+              <img class="rounded-circle img-profile" :src="`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${p.lol_picture}.jpg`">
               <a target="_blank" class="small text-nowrap" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`">{{ p.riot_name }} #{{ p.riot_tag }}</a>
             </div>
           </td>

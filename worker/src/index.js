@@ -5,7 +5,6 @@ import twitchApi from "./apis/twitchApi";
 import riotApi from "./apis/riotApi";
 import { updateGeneralData } from "./crons/update-general-data";
 import { updateAccountsData } from "./crons/update-accounts-data";
-import { updateLolIconVersion } from "./crons/update-lol-icon-version";
 
 const router = Router();
 const region = "lan";
@@ -49,7 +48,7 @@ router.get("/participants", async (req, env) => {
 
   if (!results[0]) return null;
 
-  const control = await env.PARTICIPANTS.prepare("SELECT last_updated, lol_icon_version FROM control WHERE id = ?").bind(1).first();
+  const control = await env.PARTICIPANTS.prepare("SELECT last_updated FROM control WHERE id = ?").bind(1).first();
   const sorted = results.sort((a, b) => {
     if (!a.position || !b.position) {
       if (!a.position) return 1; // Colocar a 'a' al final
@@ -58,7 +57,7 @@ router.get("/participants", async (req, env) => {
     return a.position - b.position;
   });
 
-  const data = { participants: sorted, last_updated: control.last_updated, lol_icon_version: control.lol_icon_version };
+  const data = { participants: sorted, last_updated: control.last_updated };
   return new JsonResponse(data);
 });
 
@@ -97,10 +96,6 @@ router.post("/reset-position-change", async (req, env) => {
   }
 });
 
-router.get("/update-icon-version", async (req, env) => {
-  return new JsonResponse(await updateLolIconVersion(env));
-});
-
 router.all("*", () => new JsResponse("Not Found.", { status: 404 }));
 
 export default {
@@ -111,9 +106,6 @@ export default {
     switch (event.cron) {
     case "*/10 * * * *":
       await updateGeneralData(env);
-      break;
-    case "0 6 * * *":
-      await updateLolIconVersion(env);
       break;
     }
   }
