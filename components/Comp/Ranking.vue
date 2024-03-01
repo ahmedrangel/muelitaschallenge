@@ -90,7 +90,7 @@ onBeforeUnmount(() => {
   sorterHandler("remove");
 });
 
-const matches_per_day = 8;
+const matches_per_day = 10;
 const date_init = new Date("2024-03-01T00:00:00-06:00");
 const now = new Date();
 const nowInCDMX = new Date(now.toLocaleString("en-US", { timeZone: "America/Mexico_City" }));
