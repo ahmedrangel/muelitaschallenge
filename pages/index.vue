@@ -30,8 +30,8 @@ useHead({
 <template>
   <!-- Pages: keep single root, everything goes inside 'main' -->
   <main>
-    <div class="text-center mb-2" style="translate: 0px -12px;">
-      <img src="/images/muelitaschallenge_wm.png" class="img-fluid" width="600">
+    <div class="text-center my-4">
+      <img src="/images/muelitaschallenge_banner.png" class="img-fluid" width="600">
     </div>
     <!-- Cantidad de participantes -->
     <CompParticipantsCounter :data="participants" :last-updated="last_updated" />
