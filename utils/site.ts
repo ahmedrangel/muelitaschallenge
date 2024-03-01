@@ -1,6 +1,6 @@
 export const SITE = {
   title: "Muelitas Challenge",
-  host: "https://soloqchallenge.pages.dev",
+  host: "https://muelitaschallenge.com",
   description: "Muelitas SoloQ Challenge",
   keywords: "muelitas, challenge, soloq, league of legends, riot, lol, elo, twitch, streamers",
   developers: [
