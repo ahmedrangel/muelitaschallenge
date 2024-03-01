@@ -99,7 +99,3 @@ main ::-webkit-scrollbar-track {
 .bg-footer {
   background-color: #0c1018;
 }
-
-#layout {
-  background-color: var(--bs-dark);
-}
