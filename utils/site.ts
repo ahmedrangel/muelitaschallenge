@@ -8,8 +8,11 @@ export const SITE = {
     { user: "Yizack", github: "yizack", color: "c9cc00"},
   ],
   organizers: [
-    { user: "chupamuelitas", twitch: "chupamuelitas", color: "00ff7f"},
-    { user: "chinololeroo", twitch: "ChinoLoleroo", color: "ff69b4"}
+    { user: "chupamuelitas", name: "chupamuelitas", color: "00ff7f"},
+    { user: "chinololeroo", name: "ChinoLoleroo", color: "ff69b4"}
+  ],
+  designers: [
+    { user: "brays70", name: "BrayS70", color: "00ff7f"},
   ],
   banner: "images/muelitaschallenge_wm.png"
 };
