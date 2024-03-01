@@ -7,7 +7,7 @@ const last_updated = data.value?.last_updated;
 <template>
   <!-- Pages: keep single root, everything goes inside 'main' -->
   <main>
-    <div class="text-center">
+    <div class="text-center mb-2">
       <img src="/images/muelitaschallenge_wm.png" class="img-fluid" width="600">
     </div>
     <!-- Cantidad de participantes -->
