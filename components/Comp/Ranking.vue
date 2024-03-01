@@ -20,6 +20,7 @@ const sort = (type: string, order: string) => {
   if (!type && order === "init") {
     participants.value.sort((a: Record<string, number>, b: Record<string, number>) => {
       if (!a.position || !b.position) {
+        if (!a.position && !b.position) return a.raw_position - b.raw_position;
         if (!a.position) return 1;
         if (!b.position) return -1;
       }
@@ -128,7 +129,7 @@ const remainMatchesToday = (total: number) => {
         </tr>
       </thead>
       <tbody class="border">
-        <tr v-for="p of participants" :key="p.position" class="text-center align-middle">
+        <tr v-for="p of participants" :key="p.raw_position" class="text-center align-middle">
           <th scope="row"><small>{{ p.position }}</small></th>
           <th scope="row" style="width: 40px;">
             <div class="d-flex align-items-center justify-content-center gap-1 px-1" :class="`${p.position_change > 0 ? 'text-positive' : p.position_change < 0 ? 'text-negative' : 'text-muted'}`">

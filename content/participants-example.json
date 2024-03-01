@@ -17,7 +17,8 @@
       "tier": "",
       "position": 1,
       "position_change": 0,
-      "instagram": "papisosa0"
+      "instagram": "papisosa0",
+      "raw_position": 1
     },
     {
       "riot_name": "MarioMe",
@@ -36,7 +37,8 @@
       "tier": "",
       "position": 2,
       "position_change": 0,
-      "instagram": "mariome93"
+      "instagram": "mariome93",
+      "raw_position": 2
     },
     {
       "riot_name": "Shroom",
@@ -55,7 +57,8 @@
       "tier": "",
       "position": 3,
       "position_change": 1,
-      "instagram": "blurelle"
+      "instagram": "blurelle",
+      "raw_position": 3
     },
     {
       "riot_name": "Lukwer",
@@ -74,7 +77,8 @@
       "tier": "",
       "position": 4,
       "position_change": 1,
-      "instagram": "lukwerX"
+      "instagram": "lukwerX",
+      "raw_position": 4
     },
     {
       "riot_name": "llaChinx",
@@ -93,7 +97,8 @@
       "tier": "",
       "position": 5,
       "position_change": -2,
-      "instagram": "chinololero"
+      "instagram": "chinololero",
+      "raw_position": 5
     },
     {
       "riot_name": "Qwermiguel",
@@ -112,7 +117,8 @@
       "tier": "",
       "position": 6,
       "position_change": 0,
-      "instagram": "qwermiguel"
+      "instagram": "qwermiguel",
+      "raw_position": 6
     },
     {
       "riot_name": "Madjusito",
@@ -131,7 +137,8 @@
       "tier": "",
       "position": 7,
       "position_change": 1,
-      "instagram": "madhusito"
+      "instagram": "madhusito",
+      "raw_position": 7
     },
     {
       "riot_name": "PerdíTodoConBTC",
@@ -150,7 +157,8 @@
       "tier": "I",
       "position": 8,
       "position_change": -1,
-      "instagram": "xcaresapo"
+      "instagram": "xcaresapo",
+      "raw_position": 8
     },
     {
       "riot_name": "CATADOR DE PNES",
@@ -169,7 +177,8 @@
       "tier": "II",
       "position": 9,
       "position_change": 0,
-      "instagram": "angartan"
+      "instagram": "angartan",
+      "raw_position": 9
     },
     {
       "riot_name": "valany",
@@ -188,7 +197,8 @@
       "tier": "II",
       "position": 10,
       "position_change": 1,
-      "instagram": "valanykr_"
+      "instagram": "valanykr_",
+      "raw_position": 10
     },
     {
       "riot_name": "Pichu",
@@ -207,7 +217,8 @@
       "tier": "III",
       "position": 11,
       "position_change": -1,
-      "instagram": "soypichuwtf"
+      "instagram": "soypichuwtf",
+      "raw_position": 11
     },
     {
       "riot_name": "Jonnya",
@@ -226,7 +237,8 @@
       "tier": "IV",
       "position": 12,
       "position_change": 0,
-      "instagram": "jonnijuro"
+      "instagram": "jonnijuro",
+      "raw_position": 12
     },
     {
       "riot_name": "EST oyEnCuatro",
@@ -245,7 +257,8 @@
       "tier": "III",
       "position": 13,
       "position_change": 3,
-      "instagram": "Jimrising12"
+      "instagram": "Jimrising12",
+      "raw_position": 13
     },
     {
       "riot_name": "EmiilyExtacy",
@@ -264,7 +277,8 @@
       "tier": "III",
       "position": 14,
       "position_change": -1,
-      "instagram": "emiilyextacy"
+      "instagram": "emiilyextacy",
+      "raw_position": 14
     },
     {
       "riot_name": "Bunnita",
@@ -283,7 +297,8 @@
       "tier": "IV",
       "position": 15,
       "position_change": -1,
-      "instagram": "bunnita__"
+      "instagram": "bunnita__",
+      "raw_position": 15
     },
     {
       "riot_name": "Epsylon",
@@ -302,7 +317,8 @@
       "tier": "IV",
       "position": 16,
       "position_change": -1,
-      "instagram": "epsyloncat"
+      "instagram": "epsyloncat",
+      "raw_position": 16
     },
     {
       "riot_name": "Mikasa Ackerman",
@@ -314,16 +330,16 @@
       "twitter": "SeraphineYue",
       "is_live": 0,
       "is_ingame": 0,
-      "wins": 35,
-      "losses": 32,
-      "lp": 21,
-      "elo": "gold",
-      "tier": "IV",
-      "position": 17,
+      "wins": null,
+      "losses": null,
+      "lp": null,
+      "elo": null,
+      "tier": null,
+      "position": null,
       "position_change": 0,
-      "instagram": "seraphine_yue"
+      "instagram": "seraphine_yue",
+      "raw_position": 17
     }
   ],
-  "last_updated": "2024-02-24T21:11:15.059Z",
-  "lol_icon_version": "14.4.1"
+  "last_updated": "2024-02-24T21:11:15.059Z"
 }
