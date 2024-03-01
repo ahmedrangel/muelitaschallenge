@@ -14,5 +14,5 @@ export const SITE = {
   designers: [
     { user: "brays70", name: "BrayS70", color: "00ff7f"},
   ],
-  banner: "images/muelitaschallenge_wm.png"
+  banner: "images/muelitaschallenge_banner.png"
 };
