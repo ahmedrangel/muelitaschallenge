@@ -90,7 +90,7 @@ onBeforeUnmount(() => {
 });
 
 const matches_per_day = 8;
-const date_init = new Date("2024-01-24T00:00:00-06:00");
+const date_init = new Date("2024-03-01T00:00:00-06:00");
 const now = new Date();
 const nowInCDMX = new Date(now.toLocaleString("en-US", { timeZone: "America/Mexico_City" }));
 
@@ -98,7 +98,7 @@ const remainMatchesToday = (total: number) => {
   const daysPassed = Math.floor((Number(nowInCDMX) - Number(date_init)) / (1000 * 3600 * 24)) + 1; // Calcular días pasados desde la fecha inicial
   const totalAvailableMatches = daysPassed * matches_per_day; // Calcular el total de matches disponibles hasta hoy
   const remainingMatches = totalAvailableMatches - total; // Calcular los matches que quedan hoy
-  return 999; // remainingMatches;
+  return remainingMatches;
 };
 </script>
 
