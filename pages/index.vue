@@ -2,6 +2,29 @@
 const { data: data } = await useFetch("/api/participants") as Record<string, any>;
 const participants = data.value?.participants;
 const last_updated = data.value?.last_updated;
+
+useSeoMeta({
+  title: SITE.title,
+  description: SITE.description,
+  keywords: SITE.keywords,
+  // Open Graph
+  ogType: "website",
+  ogTitle: SITE.title,
+  ogSiteName: SITE.title,
+  ogDescription: SITE.description,
+  ogUrl: SITE.host,
+  ogImage: SITE.host + "/" + SITE.banner,
+  // Twitter
+  twitterCard: "summary_large_image",
+  twitterTitle: SITE.title,
+  twitterDescription: SITE.description
+});
+
+useHead({
+  link: [
+    { rel: "canonical", href: SITE.host }
+  ]
+});
 </script>
 
 <template>
