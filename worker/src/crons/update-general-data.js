@@ -119,14 +119,12 @@ export const updateGeneralData = async(env) => {
   // Reset position_change if hour is 0 and minutes < 10
   await resetPositionChange(env);
 
-  if (sorted[0]) {
-    await updateTwitchLiveStatus(env, twitch_ids);
-    await updateTwitchData(env, twitch_ids);
-    await env.PARTICIPANTS.prepare("UPDATE control SET last_updated = ? WHERE id = ?")
-      .bind(new Date().toISOString(), 1).run();
+  await updateTwitchLiveStatus(env, twitch_ids);
+  await updateTwitchData(env, twitch_ids);
+  await env.PARTICIPANTS.prepare("UPDATE control SET last_updated = ? WHERE id = ?")
+    .bind(new Date().toISOString(), 1).run();
 
-    return sorted;
-  }
+  return sorted;
 };
 
 /*

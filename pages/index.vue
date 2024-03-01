@@ -7,6 +7,9 @@ const last_updated = data.value?.last_updated;
 <template>
   <!-- Pages: keep single root, everything goes inside 'main' -->
   <main>
+    <div class="text-center">
+      <img src="/images/muelitaschallenge_wm.png" width="600">
+    </div>
     <!-- Cantidad de participantes -->
     <CompParticipantsCounter :data="participants" :last-updated="last_updated" />
     <!-- Tabla de clasificación -->
