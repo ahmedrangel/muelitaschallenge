@@ -73,6 +73,7 @@ router.post("/update-general", async (req, env) => {
     return new JsonResponse(await updateGeneralData(env));
   }
   catch (err) {
+    console.log(err);
     return new JsonResponse({ status: "Bad Request", status_code: 400 });
   }
 });
