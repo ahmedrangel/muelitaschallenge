@@ -142,7 +142,7 @@ const remainMatchesToday = (total: number) => {
             </span>
           </td>
           <td class="text-start">
-            <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-2 px-1">
               <img class="rounded-circle img-profile" :src="`https://static-cdn.jtvnw.net/${p.twitch_picture.replace('300x300', '70x70')}`">
               <a target="_blank" class="small" :href="`https://twitch.tv/${p.twitch_login}`">{{ p.twitch_display }}</a>
             </div>
