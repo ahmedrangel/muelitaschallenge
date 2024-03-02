@@ -2,7 +2,6 @@ export const getPercentage = (wins: number, losses: number) => {
   if (!wins && !losses) return 0;
   const winrate = wins / (wins + losses) * 100;
   const formatted = winrate % 1 === 0 ? winrate.toFixed(0) : winrate.toFixed(1);
-  console.log(formatted);
   return formatted;
 }
 
