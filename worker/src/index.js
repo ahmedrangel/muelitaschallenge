@@ -43,29 +43,6 @@ router.post("/add", async (req, env) => {
   }
 });
 
-router.get("/participants", async (req, env) => {
-  const { results } = await env.PARTICIPANTS.prepare("SELECT riot_name, riot_tag, lol_picture, twitch_login, twitch_display, twitch_picture, twitter, is_live, is_ingame, wins, losses, lp, elo, tier, position, position_change, instagram from participants").all();
-
-  if (!results[0]) return null;
-
-  const control = await env.PARTICIPANTS.prepare("SELECT last_updated FROM control WHERE id = ?").bind(1).first();
-  const sorted = results.sort((a, b) => {
-    if (!a.position || !b.position) {
-      if (!a.position) return 1; // Colocar a 'a' al final
-      if (!b.position) return -1; // Colocar a 'b' al final
-    }
-    return a.position - b.position;
-  });
-
-  let i = 0;
-  for (const participant of sorted) {
-    participant.raw_position = ++i;
-  }
-
-  const data = { participants: sorted, last_updated: control.last_updated };
-  return new JsonResponse(data);
-});
-
 router.post("/update-general", async (req, env) => {
   try {
     const { key } = await req.json();
