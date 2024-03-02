@@ -6,15 +6,24 @@ const props = defineProps({
 
 const getServerTime = () => new Date().toLocaleString("es-MX", { timeZone: "America/Mexico_City", hour: "2-digit", hour12: false, minute: "2-digit", second: "2-digit" });
 const serverTime = ref(getServerTime());
+const last_updated_time = ref(getTimeUnitsFromISODate(props.lastUpdated));
+
 const interval = ref();
+const interval2 = ref();
+
 onMounted(() => {
   interval.value = setInterval(() => {
     serverTime.value = getServerTime();
   }, 1000);
+
+  interval2.value = setInterval(() => {
+    last_updated_time.value = getTimeUnitsFromISODate(props.lastUpdated);
+  }, 60000);
 });
 
 onBeforeMount(() => {
   clearInterval(interval.value);
+  clearInterval(interval2.value);
 });
 </script>
 
@@ -36,7 +45,7 @@ onBeforeMount(() => {
       <div v-if="props.lastUpdated" class="d-flex gap-1 align-items-center text-nowrap">
         <Icon name="ph:clock-clockwise-bold" />
         <span>Actualizado:</span>
-        <span>hace {{ getTimeUnitsFromISODate(props.lastUpdated) }}</span>
+        <span>hace {{ last_updated_time }}</span>
       </div>
     </div>
   </div>
