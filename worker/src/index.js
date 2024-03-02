@@ -110,7 +110,7 @@ export default {
   },
   async scheduled(event, env) {
     switch (event.cron) {
-    case "*/10 * * * *":
+    case "*/5 * * * *":
       await updateGeneralData(env);
       break;
     }
