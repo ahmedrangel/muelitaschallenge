@@ -26,7 +26,7 @@
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxtjs/sitemap": "^5.1.0",
     "@types/bootstrap": "^5.2.10",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "nuxt": "^3.10.3",
     "nuxt-icon": "^0.6.8",
     "stylelint-config-standard": "^36.0.0"
