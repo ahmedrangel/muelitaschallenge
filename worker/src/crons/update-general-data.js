@@ -4,6 +4,10 @@ import { fixRank, resetPositionChange } from "../utils/helpers";
 
 const region = "lan";
 let participants = [];
+let twitch_data = [];
+let updater_participants = [];
+let updater_ingame = [];
+let updater_position_change = [];
 
 // Iterated fetch
 const updateRankedData = async(env, p) => {
@@ -15,8 +19,9 @@ const updateRankedData = async(env, p) => {
 
     if (soloq) {
       participants.push({ id_summoner: p.id_summoner, wins: soloq.wins, losses: soloq.losses, lp: soloq.leaguePoints, elo: soloq.tier, tier: soloq.rank, position: p.position, position_change: p.position_change });
-      await env.PARTICIPANTS.prepare("UPDATE participants SET wins = ?, losses = ?, lp = ?, elo = ?, tier = ? WHERE id_summoner = ?")
-        .bind(soloq.wins, soloq.losses, soloq.leaguePoints, soloq.tier.toLowerCase(), fixRank(soloq.tier, soloq.rank), p.id_summoner).run();
+      if (p.wins !== soloq.wins || p.losses !== soloq.losses || p.lp !== soloq.leaguePoints) {
+        updater_participants.push({ wins: soloq.wins, losses: soloq.losses, lp: soloq.leaguePoints, elo: soloq.tier.toLowerCase(), tier: fixRank(soloq.tier, soloq.rank), id_summoner: p.id_summoner });
+      }
     }
 
     return participants;
@@ -30,16 +35,16 @@ const updateLolIngameStatus = async(env, p) => {
   const ingame_data = await _riot.getLiveGameBySummonerId(p.id_summoner, route);
 
   if (ingame_data?.participants) {
-    await env.PARTICIPANTS.prepare("UPDATE participants SET is_ingame = ? WHERE id_summoner = ?")
-      .bind(1, p.id_summoner).run();
+    if (p.is_ingame !== 1)
+      updater_ingame.push({ id_summoner: p.id_summoner, is_ingame: 1 });
   }
   else {
-    await env.PARTICIPANTS.prepare("UPDATE participants SET is_ingame = ? WHERE id_summoner = ?")
-      .bind(0, p.id_summoner).run();
+    if (p.is_ingame !== 0)
+      updater_ingame.push({ id_summoner: p.id_summoner, is_ingame: 0 });
   }
 };
 
-const sortRankedData = async(env) => {
+const sortRankedData = () => {
   if (!participants[0]) return null;
 
   // Sort participants by elo and lp
@@ -56,8 +61,9 @@ const sortRankedData = async(env) => {
   for (const p of sorted) {
     const next_position = index + 1;
     const position_change = (p.position - next_position) + p.position_change;
-    await env.PARTICIPANTS.prepare("UPDATE participants SET position = ?, position_change = ? WHERE id_summoner = ?")
-      .bind(next_position, position_change, p.id_summoner).run();
+    if (p.position !== next_position || p.position_change !== position_change) {
+      updater_position_change.push({ id_summoner: p.id_summoner, position: next_position, position_change });
+    }
     index++;
   }
 
@@ -69,10 +75,18 @@ const updateTwitchLiveStatus = async(env, twitch_ids) => {
   const _twitch = new twitchApi(env.TWITCH_CLIENT_ID, env.TWITCH_CLIENT_SECRET);
   // Update participants live status
   const streams_data = await _twitch.getStreamsById(twitch_ids);
-  await env.PARTICIPANTS.prepare("UPDATE participants SET is_live = 0 WHERE is_live = 1").run();
-  for (const s of streams_data) {
-    await env.PARTICIPANTS.prepare("UPDATE participants SET is_live = ? WHERE twitch_id = ?")
-      .bind(1, s.user_id).run();
+  const live_ids = streams_data.map(s => s.user_id);
+  for (const p of twitch_data) {
+    if (live_ids.includes(p.twitch_id)) {
+      if (p.is_live !== 1)
+        await env.PARTICIPANTS.prepare("UPDATE participants SET is_live = ? WHERE twitch_id = ?")
+          .bind(1, p.twitch_id).run();
+    }
+    else {
+      if (p.is_live !== 0)
+        await env.PARTICIPANTS.prepare("UPDATE participants SET is_live = ? WHERE twitch_id = ?")
+          .bind(0, p.twitch_id).run();
+    }
   }
 };
 
@@ -83,15 +97,18 @@ const updateTwitchData = async(env, twitch_ids) => {
   const users_data = await _twitch.getUsersById(twitch_ids);
   for (const u of users_data) {
     data.push(u);
-    await env.PARTICIPANTS.prepare("UPDATE participants SET twitch_login = ?, twitch_display = ?, twitch_picture = ? WHERE twitch_id = ?")
-      .bind(u.login, u.display_name, u.profile_image_url.replace("https://static-cdn.jtvnw.net/",""), u.id).run();
+    const match_participant = twitch_data.filter(p => p.twitch_id == u.id)[0];
+    if (u.login !== match_participant.twitch_login || u.display_name !== match_participant.twitch_display || u.profile_image_url.replace("https://static-cdn.jtvnw.net/","") !== match_participant.twitch_picture) {
+      await env.PARTICIPANTS.prepare("UPDATE participants SET twitch_login = ?, twitch_display = ?, twitch_picture = ? WHERE twitch_id = ?")
+        .bind(u.login, u.display_name, u.profile_image_url.replace("https://static-cdn.jtvnw.net/",""), u.id).run();
+    }
   }
   return data;
 };
 
 // Export
 export const updateGeneralData = async(env) => {
-  const { results } = await env.PARTICIPANTS.prepare("SELECT id_summoner, twitch_id, position, position_change from participants").all();
+  const { results } = await env.PARTICIPANTS.prepare("SELECT id_summoner, twitch_id, position, position_change, wins, losses, lp, is_ingame, twitch_login, twitch_display, twitch_picture, is_live from participants").all();
   if (!results[0]) return null;
 
   participants = [];
@@ -109,16 +126,37 @@ export const updateGeneralData = async(env) => {
     await new Promise(resolve => setTimeout(resolve, 50));
     await updateLolIngameStatus(env, p);
     await new Promise(resolve => setTimeout(resolve, 100));
+    twitch_data.push({ twitch_id: p.twitch_id, twitch_login: p.twitch_login, twitch_display: p.twitch_display, twitch_picture: p.twitch_picture, is_live: p.is_live });
     index++;
   }
 
-  const sorted = await sortRankedData(env);
+  const sorted = sortRankedData();
+
+  await updateTwitchData(env, twitch_ids);
+  await updateTwitchLiveStatus(env, twitch_ids);
+
+  // Ranked update
+  for (const p of updater_participants) {
+    await env.PARTICIPANTS.prepare("UPDATE participants SET wins = ?, losses = ?, lp = ?, elo = ?, tier = ? WHERE id_summoner = ?")
+      .bind(p.wins, p.losses, p.lp, p.elo, p.tier, p.id_summoner).run();
+  }
+
+  // Position change update
+  for (const p of updater_position_change) {
+    await env.PARTICIPANTS.prepare("UPDATE participants SET position = ?, position_change = ? WHERE id_summoner = ?")
+      .bind(p.position, p.position_change, p.id_summoner).run();
+  }
+
+  // Ingame update
+  for (const p of updater_ingame) {
+    await env.PARTICIPANTS.prepare("UPDATE participants SET is_ingame = ? WHERE id_summoner = ?")
+      .bind(p.is_ingame, p.id_summoner).run();
+  }
 
   // Reset position_change if hour is 0 and minutes < 10
   await resetPositionChange(env);
 
-  await updateTwitchLiveStatus(env, twitch_ids);
-  await updateTwitchData(env, twitch_ids);
+  // Update last_updated
   await env.PARTICIPANTS.prepare("UPDATE control SET last_updated = ? WHERE id = ?")
     .bind(new Date().toISOString(), 1).run();
 
