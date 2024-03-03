@@ -107,7 +107,7 @@ export const getTimeUnitsFromISODate = (ISO: string) => {
   if (segundos >= 0 && anios === 0 && meses === 0 && dias === 0 && horas === 0 && minutos === 0) unidades.push(`${segundos} segundo${segundos !== 1 ? "s" : ""}`);
 
   const result = unidades.join(", ");
-  return { result, outdated: msdiff >= 300000 ? true : false };
+  return { result, outdated: msdiff >= 360000 ? true : false };
 };
 
 export const capitalizeFirst = (text: string) => {
