@@ -4,7 +4,7 @@ import JsonResponse from "./jsonResponse";
 import twitchApi from "./apis/twitchApi";
 import riotApi from "./apis/riotApi";
 import { updateGeneralData } from "./crons/update-general-data";
-import { updateAccountsData } from "./crons/update-accounts-data";
+import { updateLolIcons } from "./crons/update-lol-icons";
 
 const router = Router();
 const region = "lan";
@@ -59,7 +59,7 @@ router.post("/update-lol-icons", async (req, env) => {
   try {
     const { key } = await req.json();
     if (key !== env.POST_KEY) return new JsonResponse({ status: "Forbidden", status_code: 403 });
-    return new JsonResponse(await updateAccountsData(env));
+    return new JsonResponse(await updateLolIcons(env));
   }
   catch (err) {
     return new JsonResponse({ status: "Bad Request", status_code: 400 });
