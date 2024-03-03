@@ -112,6 +112,10 @@ export const updateGeneralData = async(env) => {
   if (!results[0]) return null;
 
   participants = [];
+  twitch_data = [];
+  updater_participants = [];
+  updater_ingame = [];
+  updater_position_change = [];
   const twitch_ids = [];
 
   let index = 0;
@@ -134,6 +138,10 @@ export const updateGeneralData = async(env) => {
 
   await updateTwitchData(env, twitch_ids);
   await updateTwitchLiveStatus(env, twitch_ids);
+
+  console.info(updater_participants);
+  console.info(updater_position_change);
+  console.info(updater_ingame);
 
   // Ranked update
   for (const p of updater_participants) {
