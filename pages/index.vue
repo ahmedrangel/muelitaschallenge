@@ -30,8 +30,9 @@ useHead({
 <template>
   <!-- Pages: keep single root, everything goes inside 'main' -->
   <main>
-    <div class="text-center my-4">
-      <img src="/images/muelitaschallenge_banner.png" class="img-fluid" width="600">
+    <div class="text-center my-3">
+      <img src="/images/muelitaschallenge_banner.png" class="img-fluid mb-4" width="600">
+      <h5 class="text-uppercase mb-0">Tabla del Muelitas Challenge</h5>
     </div>
     <!-- Cantidad de participantes -->
     <CompParticipantsCounter :data="participants" :last-updated="last_updated" />

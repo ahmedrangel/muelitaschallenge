@@ -37,11 +37,11 @@ beforeEach(({ name }) => {
         <span class="navbar-toggler-icon" />
       </button>
       <div class="navbar-brand ms-2 ms-lg-0 me-auto d-flex align-items-center gap-1 text-decoration-none">
-        <span><img src="/images/muelitaschallenge.svg" width="40">&nbsp;&nbsp;{{ SITE.title }}</span>
+        <span><img src="/images/muelitaschallenge.svg" width="40">&nbsp;&nbsp;{{ SITE.name }}</span>
       </div>
       <div id="offcanvasNavbar" class="offcanvas offcanvas-start bg-secondary" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header px-4 pt-4 pb-0">
-          <span width="45">{{ SITE.title }}</span>
+          <span width="45">{{ SITE.name }}</span>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" />
         </div>
         <div class="offcanvas-body">
