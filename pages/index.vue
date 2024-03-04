@@ -33,7 +33,7 @@ useHead({
     <div class="text-center my-3">
       <img src="/images/muelitaschallenge_banner.png" class="img-fluid mb-4" width="600">
       <h5 class="text-uppercase mb-0 fw-bold">Tabla del Muelitas Challenge 2024</h5>
-      <small class="fw-bold">1 Marzo - 31 Marzo</small>
+      <small class="fw-bold">1 Marzo — 31 Marzo</small>
     </div>
     <!-- Cantidad de participantes -->
     <CompParticipantsCounter :data="participants" :last-updated="last_updated" />
