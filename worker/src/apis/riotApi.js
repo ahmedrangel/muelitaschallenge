@@ -36,8 +36,8 @@ class riotApi {
     return data;
   }
 
-  async getLiveGameBySummonerId(summoner_id, route) {
-    const data = await ofetch(`https://${route}.${this.domain}/lol/spectator/v4/active-games/by-summoner/${summoner_id}?api_key=${this.RIOT_KEY}`).catch(() => null);
+  async getSpectatorByPuuid(puuid, route) {
+    const data = await ofetch(`https://${route}.${this.domain}/lol/spectator/v5/active-games/by-summoner/${puuid}?api_key=${this.RIOT_KEY}`).catch(() => null);
     return data;
   }
 

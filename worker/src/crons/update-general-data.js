@@ -18,9 +18,9 @@ const updateRankedData = async(env, p) => {
     const soloq = ranked_data.filter(item => item.queueType === "RANKED_SOLO_5x5")[0];
 
     if (soloq) {
-      participants.push({ id_summoner: p.id_summoner, wins: soloq.wins, losses: soloq.losses, lp: soloq.leaguePoints, elo: soloq.tier, tier: soloq.rank, position: p.position, position_change: p.position_change });
+      participants.push({ puuid: p.puuid, id_summoner: p.id_summoner, wins: soloq.wins, losses: soloq.losses, lp: soloq.leaguePoints, elo: soloq.tier, tier: soloq.rank, position: p.position, position_change: p.position_change });
       if (p.wins !== soloq.wins || p.losses !== soloq.losses || p.lp !== soloq.leaguePoints) {
-        updater_participants.push({ wins: soloq.wins, losses: soloq.losses, lp: soloq.leaguePoints, elo: soloq.tier.toLowerCase(), tier: fixRank(soloq.tier, soloq.rank), id_summoner: p.id_summoner });
+        updater_participants.push({ puuid: p.puuid, wins: soloq.wins, losses: soloq.losses, lp: soloq.leaguePoints, elo: soloq.tier.toLowerCase(), tier: fixRank(soloq.tier, soloq.rank) });
       }
     }
 
@@ -32,15 +32,15 @@ const updateRankedData = async(env, p) => {
 const updateLolIngameStatus = async(env, p) => {
   const _riot = new riotApi(env.RIOT_KEY);
   const route = _riot.route(region);
-  const ingame_data = await _riot.getLiveGameBySummonerId(p.id_summoner, route);
+  const ingame_data = await _riot.getSpectatorByPuuid(p.puuid, route);
 
   if (ingame_data?.participants) {
     if (p.is_ingame !== 1)
-      updater_ingame.push({ id_summoner: p.id_summoner, is_ingame: 1 });
+      updater_ingame.push({ puuid: p.puuid, is_ingame: 1 });
   }
   else {
     if (p.is_ingame !== 0)
-      updater_ingame.push({ id_summoner: p.id_summoner, is_ingame: 0 });
+      updater_ingame.push({ puuid: p.puuid, is_ingame: 0 });
   }
 };
 
@@ -62,7 +62,7 @@ const sortRankedData = () => {
     const next_position = index + 1;
     const position_change = (p.position - next_position) + p.position_change;
     if (p.position !== next_position || p.position_change !== position_change) {
-      updater_position_change.push({ id_summoner: p.id_summoner, position: next_position, position_change });
+      updater_position_change.push({ puuid: p.puuid, position: next_position, position_change });
     }
     index++;
   }
@@ -108,7 +108,7 @@ const updateTwitchData = async(env, twitch_ids) => {
 
 // Export
 export const updateGeneralData = async(env) => {
-  const { results } = await env.PARTICIPANTS.prepare("SELECT id_summoner, twitch_id, position, position_change, wins, losses, lp, is_ingame, twitch_login, twitch_display, twitch_picture, is_live from participants").all();
+  const { results } = await env.PARTICIPANTS.prepare("SELECT puuid, id_summoner, twitch_id, position, position_change, wins, losses, lp, is_ingame, twitch_login, twitch_display, twitch_picture, is_live from participants").all();
   if (!results[0]) return null;
 
   participants = [];
@@ -145,20 +145,20 @@ export const updateGeneralData = async(env) => {
 
   // Ranked update
   for (const p of updater_participants) {
-    await env.PARTICIPANTS.prepare("UPDATE participants SET wins = ?, losses = ?, lp = ?, elo = ?, tier = ? WHERE id_summoner = ?")
-      .bind(p.wins, p.losses, p.lp, p.elo, p.tier, p.id_summoner).run();
+    await env.PARTICIPANTS.prepare("UPDATE participants SET wins = ?, losses = ?, lp = ?, elo = ?, tier = ? WHERE puuid = ?")
+      .bind(p.wins, p.losses, p.lp, p.elo, p.tier, p.puuid).run();
   }
 
   // Position change update
   for (const p of updater_position_change) {
-    await env.PARTICIPANTS.prepare("UPDATE participants SET position = ?, position_change = ? WHERE id_summoner = ?")
-      .bind(p.position, p.position_change, p.id_summoner).run();
+    await env.PARTICIPANTS.prepare("UPDATE participants SET position = ?, position_change = ? WHERE puuid = ?")
+      .bind(p.position, p.position_change, p.puuid).run();
   }
 
   // Ingame update
   for (const p of updater_ingame) {
-    await env.PARTICIPANTS.prepare("UPDATE participants SET is_ingame = ? WHERE id_summoner = ?")
-      .bind(p.is_ingame, p.id_summoner).run();
+    await env.PARTICIPANTS.prepare("UPDATE participants SET is_ingame = ? WHERE puuid = ?")
+      .bind(p.is_ingame, p.puuid).run();
   }
 
   // Reset position_change if hour is 0 and minutes < 10
