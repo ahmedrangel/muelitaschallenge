@@ -1,6 +1,6 @@
 <template>
   <footer class="text-center py-4 border-top bg-footer text-muted">
-    <h5 class="d-block mb-2">© {{ new Date().getFullYear() }} {{ SITE.title }}</h5>
+    <h5 class="d-block mb-2">© {{ new Date().getFullYear() }} {{ SITE.name }}</h5>
     <h5 class="mb-2 small fw-light">
       Organizado por:
       <template v-for="(d, i) of SITE.organizers" :key="i">
