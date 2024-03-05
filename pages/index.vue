@@ -10,7 +10,7 @@ useSeoMeta({
   // Open Graph
   ogType: "website",
   ogTitle: SITE.title,
-  ogSiteName: SITE.title,
+  ogSiteName: SITE.name,
   ogDescription: SITE.description,
   ogUrl: SITE.host,
   ogImage: SITE.host + "/" + SITE.banner,
@@ -31,8 +31,8 @@ useHead({
   <!-- Pages: keep single root, everything goes inside 'main' -->
   <main>
     <div class="text-center my-3">
-      <img src="/images/muelitaschallenge_banner.png" class="img-fluid mb-4" width="600">
-      <h5 class="text-uppercase mb-0 fw-bold">Tabla del Muelitas Challenge 2024</h5>
+      <img :src="`/${SITE.banner}`" class="img-fluid mb-4" width="600">
+      <h5 class="text-uppercase mb-0 fw-bold">Tabla del {{ SITE.name }} 2024</h5>
       <small class="fw-bold">1 Marzo — 31 Marzo</small>
     </div>
     <!-- Cantidad de participantes -->
