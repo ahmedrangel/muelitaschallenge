@@ -35,8 +35,9 @@ onMounted(() => {
   }, 360000);
 });
 
-onBeforeMount(() => {
+onBeforeUnmount(() => {
   clearInterval(interval.value);
+  clearInterval(interval2.value);
 });
 </script>
 
