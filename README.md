@@ -1,4 +1,6 @@
 # SoloQ Ranking Ladder for Challenges
 
 ## Screenshots
-![soloqchallenge](https://github.com/ahmedrangel/soloqchallenge/assets/50090595/46ee4f8e-f470-4a7c-9fcb-0c2a780b0b87)
+![soloqchallenge1](https://github.com/ahmedrangel/soloqchallenge/assets/50090595/6f5fe02d-90c8-42fb-aec1-fa96aef0deb5)
+
+![soloqchallenge2](https://github.com/ahmedrangel/soloqchallenge/assets/50090595/d55b8853-a885-49b5-879f-d427b7cad6a0)
