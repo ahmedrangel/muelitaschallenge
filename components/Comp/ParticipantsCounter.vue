@@ -10,6 +10,7 @@ const last_updated_time = ref(getTimeUnitsFromISODate(props.lastUpdated));
 const outdated_message = ref(false);
 
 const interval = ref();
+const interval2 = ref();
 
 const isOutdated = () => {
   const { $Tooltip } = useNuxtApp();
@@ -23,14 +24,19 @@ onMounted(() => {
   interval.value = setInterval(() => {
     serverTime.value = getServerTime();
     last_updated_time.value = getTimeUnitsFromISODate(props.lastUpdated);
-    if (!outdated_message.value && last_updated_time.value.outdated) {
+  }, 1000);
+
+  interval2.value = setInterval(async() => {
+    const { last_updated } = await $fetch("/api/participants").catch(() => null) as Record<string,any>;
+    if (last_updated !== props.lastUpdated) {
       isOutdated();
     }
-  }, 1000);
+  }, 600000);
 });
 
 onBeforeMount(() => {
   clearInterval(interval.value);
+  clearInterval(interval2.value);
 });
 </script>
 
