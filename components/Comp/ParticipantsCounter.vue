@@ -37,7 +37,7 @@ onMounted(() => {
       if (i === 9) clearInterval(interval2.value);
       i++;
     }
-  }, 60000);
+  }, 30000);
 });
 
 onBeforeUnmount(() => {
