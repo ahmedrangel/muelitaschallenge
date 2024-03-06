@@ -30,13 +30,13 @@ onMounted(() => {
     const { last_updated } = await $fetch("/api/participants").catch(() => null) as Record<string,any>;
     if (last_updated !== props.lastUpdated) {
       isOutdated();
+      clearInterval(interval2.value);
     }
   }, 600000);
 });
 
 onBeforeMount(() => {
   clearInterval(interval.value);
-  clearInterval(interval2.value);
 });
 </script>
 
