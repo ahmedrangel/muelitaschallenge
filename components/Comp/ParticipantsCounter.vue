@@ -32,7 +32,7 @@ onMounted(() => {
       isOutdated();
       clearInterval(interval2.value);
     }
-  }, 600000);
+  }, 360000);
 });
 
 onBeforeMount(() => {
@@ -58,7 +58,7 @@ onBeforeMount(() => {
       <div v-if="props.lastUpdated" class="d-flex gap-1 align-items-center text-nowrap">
         <Icon name="ph:clock-clockwise-bold" />
         <span>Actualizado:</span>
-        <span :class="`${last_updated_time.outdated ? 'text-negative text-decoration-underline available-update' : ''}`" data-bs-toggle="tooltip-last-updated" title="<span class='text-dark fw-bold'>¡Resultados actualizados!</span><br><span>Refresca la página para ver los últimos resultados.</span>">hace {{ last_updated_time.result }}</span>
+        <span :class="`${outdated_message ? 'text-negative text-decoration-underline available-update' : ''}`" data-bs-toggle="tooltip-last-updated" title="<span class='text-dark fw-bold'>¡Resultados actualizados!</span><br><span>Refresca la página para ver los últimos resultados.</span>">hace {{ last_updated_time.result }}</span>
       </div>
     </div>
   </div>
