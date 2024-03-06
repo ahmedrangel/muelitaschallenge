@@ -27,12 +27,14 @@ onMounted(() => {
   }, 1000);
 
   interval2.value = setInterval(async() => {
-    const { last_updated } = await $fetch("/api/participants").catch(() => null) as Record<string,any>;
-    if (last_updated !== props.lastUpdated) {
-      isOutdated();
-      clearInterval(interval2.value);
+    if (last_updated_time.value.outdated) {
+      const { last_updated } = await $fetch("/api/participants").catch(() => null) as Record<string,any>;
+      if (last_updated !== props.lastUpdated) {
+        isOutdated();
+        clearInterval(interval2.value);
+      }
     }
-  }, 360000);
+  }, 60000);
 });
 
 onBeforeUnmount(() => {
