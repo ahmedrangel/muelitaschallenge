@@ -74,20 +74,26 @@ const sortRankedData = () => {
 const updateTwitchLiveStatus = async(env, twitch_ids) => {
   const _twitch = new twitchApi(env.TWITCH_CLIENT_ID, env.TWITCH_CLIENT_SECRET);
   // Update participants live status
+  const data = [];
   const streams_data = await _twitch.getStreamsById(twitch_ids);
   const live_ids = streams_data.map(s => s.user_id);
   for (const p of twitch_data) {
     if (live_ids.includes(p.twitch_id)) {
-      if (p.is_live !== 1)
+      if (p.is_live !== 1) {
+        data.push({ twitch_id: p.twitch_id, is_live: 1 });
         await env.PARTICIPANTS.prepare("UPDATE participants SET is_live = ? WHERE twitch_id = ?")
           .bind(1, p.twitch_id).run();
+      }
     }
     else {
-      if (p.is_live !== 0)
+      if (p.is_live !== 0) {
+        data.push({ twitch_id: p.twitch_id, is_live: 0 });
         await env.PARTICIPANTS.prepare("UPDATE participants SET is_live = ? WHERE twitch_id = ?")
           .bind(0, p.twitch_id).run();
+      }
     }
   }
+  return data;
 };
 
 // Single fetch
@@ -96,9 +102,9 @@ const updateTwitchData = async(env, twitch_ids) => {
   const data = [];
   const users_data = await _twitch.getUsersById(twitch_ids);
   for (const u of users_data) {
-    data.push(u);
     const match_participant = twitch_data.filter(p => p.twitch_id == u.id)[0];
     if (u.login !== match_participant.twitch_login || u.display_name !== match_participant.twitch_display || u.profile_image_url.replace("https://static-cdn.jtvnw.net/","") !== match_participant.twitch_picture) {
+      data.push(u);
       await env.PARTICIPANTS.prepare("UPDATE participants SET twitch_login = ?, twitch_display = ?, twitch_picture = ? WHERE twitch_id = ?")
         .bind(u.login, u.display_name, u.profile_image_url.replace("https://static-cdn.jtvnw.net/",""), u.id).run();
     }
@@ -136,12 +142,15 @@ export const updateGeneralData = async(env) => {
 
   const sorted = sortRankedData();
 
-  await updateTwitchData(env, twitch_ids);
-  await updateTwitchLiveStatus(env, twitch_ids);
+  const updater_twitch_data = await updateTwitchData(env, twitch_ids);
+  const updater_twitch_live = await updateTwitchLiveStatus(env, twitch_ids);
 
   console.info(updater_participants);
   console.info(updater_position_change);
   console.info(updater_ingame);
+  console.info(updater_twitch_data);
+  console.info(updater_twitch_live);
+
 
   // Ranked update
   for (const p of updater_participants) {
@@ -165,8 +174,10 @@ export const updateGeneralData = async(env) => {
   await resetPositionChange(env);
 
   // Update last_updated
-  await env.PARTICIPANTS.prepare("UPDATE control SET last_updated = ? WHERE id = ?")
-    .bind(new Date().toISOString(), 1).run();
+  if (updater_ingame[0] || updater_participants[0] || updater_position_change[0] || updater_twitch_data[0] || updater_twitch_live[0]) {
+    await env.PARTICIPANTS.prepare("UPDATE control SET last_updated = ? WHERE id = ?")
+      .bind(new Date().toISOString(), 1).run();
+  }
 
   return { sorted };
 };
