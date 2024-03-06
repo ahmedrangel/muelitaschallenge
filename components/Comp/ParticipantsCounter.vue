@@ -21,6 +21,7 @@ const isOutdated = () => {
 };
 
 onMounted(() => {
+  let i = 0;
   interval.value = setInterval(() => {
     serverTime.value = getServerTime();
     last_updated_time.value = getTimeUnitsFromISODate(props.lastUpdated);
@@ -33,6 +34,8 @@ onMounted(() => {
         isOutdated();
         clearInterval(interval2.value);
       }
+      if (i === 9) clearInterval(interval2.value);
+      i++;
     }
   }, 60000);
 });
