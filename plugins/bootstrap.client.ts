@@ -55,6 +55,8 @@ class Bootstrap {
   initializeTooltip () {
     const tooltipList = document.querySelectorAll("[data-bs-toggle=\"tooltip\"]");
     [...tooltipList].map(e => new Tooltip(e, { trigger: "hover", placement: "top" }));
+    const tooltipList2 = document.querySelectorAll("[data-bs-toggle=\"tooltip-last-updated\"]");
+    [...tooltipList2].map(e => new Tooltip(e, { trigger: "manual", placement: "top", html: true }));
   }
 
   showOffcanvas (id: HTMLElement) {
@@ -71,8 +73,12 @@ class Bootstrap {
 
 const bootstrap = new Bootstrap();
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.hook("app:suspense:resolve", () => {
+    bootstrap.initializePopover();
+    bootstrap.initializeTooltip();
+  });
   return {
-    provide: { bootstrap }
+    provide: { bootstrap, Tooltip }
   };
 });

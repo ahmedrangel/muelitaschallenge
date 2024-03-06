@@ -81,9 +81,6 @@ const sorterHandler = (type: string) => {
 
 onMounted(() => {
   sorterHandler("add");
-  const { $bootstrap } = useNuxtApp();
-  $bootstrap.initializePopover();
-  $bootstrap.initializeTooltip();
 });
 
 onBeforeUnmount(() => {
