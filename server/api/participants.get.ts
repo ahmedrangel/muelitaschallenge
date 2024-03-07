@@ -18,9 +18,12 @@ export default defineEventHandler(async () => {
     return a.position - b.position;
   });
 
+  const banned = [] as string[];
   let i = 0;
   for (const participant of sorted) {
     participant.raw_position = ++i;
+    if (banned.includes(participant.twitch_login)) participant.is_banned = 1;
+    else participant.is_banned = 0;
   }
 
   const data = { participants: sorted, last_updated: control.last_updated };
