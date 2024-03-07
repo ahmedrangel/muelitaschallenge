@@ -126,7 +126,7 @@ const remainMatchesToday = (total: number) => {
         </tr>
       </thead>
       <tbody class="border">
-        <tr v-for="p of participants" :key="p.raw_position" class="text-center align-middle">
+        <tr v-for="p of participants" :key="p.raw_position" class="text-center align-middle" :class="`${p.is_victim ? 'victim': ''}`" :style="`${p.is_banned ? 'filter: saturate(0) contrast(1.2); pointer-events: none' : ''}`">
           <th scope="row"><small>{{ p.position }}</small></th>
           <th scope="row" style="width: 40px;">
             <div class="d-flex align-items-center justify-content-center gap-1 px-1" :class="`${p.position_change > 0 ? 'text-positive' : p.position_change < 0 ? 'text-negative' : 'text-muted'}`">
@@ -157,7 +157,13 @@ const remainMatchesToday = (total: number) => {
             </span>
           </td>
           <td class="text-start">
-            <div class="d-flex align-items-center gap-2">
+            <div v-if="p.is_banned">
+              <strong class="h3">BANEADO</strong>
+            </div>
+            <div v-else-if="p.is_victim">
+              <strong class="h4">VÍCTIMA DE LA LEGIÓN</strong>
+            </div>
+            <div v-else class="d-flex align-items-center gap-2">
               <img class="rounded-circle img-profile" :src="`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${p.lol_picture}.jpg`">
               <a target="_blank" class="small text-nowrap" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`">{{ p.riot_name }} #{{ p.riot_tag }}</a>
             </div>

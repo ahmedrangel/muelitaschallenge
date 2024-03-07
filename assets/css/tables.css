@@ -62,3 +62,7 @@ th.sortable.ingame_sort.desc .arrows {
 tbody tr>* {
   height: 72px;
 }
+
+.victim td, .victim th {
+  background-color: #630000;
+}
