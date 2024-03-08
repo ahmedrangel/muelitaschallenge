@@ -174,10 +174,8 @@ export const updateGeneralData = async(env) => {
   await resetPositionChange(env);
 
   // Update last_updated
-  if (updater_ingame[0] || updater_participants[0] || updater_position_change[0] || updater_twitch_data[0] || updater_twitch_live[0]) {
-    await env.PARTICIPANTS.prepare("UPDATE control SET last_updated = ? WHERE id = ?")
-      .bind(new Date().toISOString(), 1).run();
-  }
+  await env.PARTICIPANTS.prepare("UPDATE control SET last_updated = ? WHERE id = ?")
+    .bind(new Date().toISOString(), 1).run();
 
   return { sorted };
 };
