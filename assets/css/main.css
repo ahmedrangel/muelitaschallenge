@@ -14,7 +14,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:hover, a:hover span {
   color: var(--bs-tertiary);
   text-decoration: underline;
 }

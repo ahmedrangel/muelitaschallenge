@@ -131,7 +131,9 @@ const remainMatchesToday = (total: number) => {
           <th scope="row" style="width: 40px;">
             <div class="d-flex align-items-center justify-content-center gap-1 px-1" :class="`${p.position_change > 0 ? 'text-positive' : p.position_change < 0 ? 'text-negative' : 'text-muted'}`">
               <Icon :name="`${p.position_change > 0 ? 'solar:alt-arrow-up-bold' : p.position_change < 0 ? 'solar:alt-arrow-down-bold' : 'bi:dash-lg'}`" />
-              <small v-if="Math.abs(p.position_change) > 0">{{ Math.abs(p.position_change) }}</small>
+              <small v-if="Math.abs(p.position_change) > 0">
+                <strong>{{ Math.abs(p.position_change) }}</strong>
+              </small>
             </div>
           </th>
           <td scope="row" style="width: 30px;">
@@ -143,7 +145,7 @@ const remainMatchesToday = (total: number) => {
             <div class="d-flex align-items-center gap-2 px-1">
               <img v-if="p.twitch_login === 'bunnita_'" src="/images/lol/rengar.jpg" class="rounded-circle img-profile">
               <img v-else class="rounded-circle img-profile" :src="`https://static-cdn.jtvnw.net/${p.twitch_picture.replace('300x300', '70x70')}`">
-              <a target="_blank" class="small" :href="`https://twitch.tv/${p.twitch_login}`">{{ p.twitch_display }}</a>
+              <a target="_blank" class="small" :href="`https://twitch.tv/${p.twitch_login}`"><strong>{{ p.twitch_display }}</strong></a>
             </div>
           </td>
           <td scope="row" style="width: 40px;">
@@ -163,13 +165,15 @@ const remainMatchesToday = (total: number) => {
             </div>
             <div v-else class="d-flex align-items-center gap-2">
               <img class="rounded-circle img-profile" :src="`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${p.lol_picture}.jpg`">
-              <a target="_blank" class="small text-nowrap" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`">{{ p.riot_name }} #{{ p.riot_tag }}</a>
+              <a target="_blank" class="small text-nowrap" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`"><strong>{{ p.riot_name }} <span class="text-muted">#{{ p.riot_tag }}</span></strong></a>
             </div>
           </td>
           <td>
             <div v-if="p.elo" class="py-1">
               <small class="text-nowrap" data-bs-toggle="tooltip" :title="`${`${capitalizeFirst(p.elo)} ${p.tier} · ${p.lp} LP`}`"><img :src="`/images/lol/${p.elo}.png`" height="36px"> {{ p.tier }}</small>
-              <small class="d-block text-nowrap">{{ p.lp }} LP</small>
+              <small class="d-block text-nowrap">
+                <strong>{{ p.lp }} LP</strong>
+              </small>
             </div>
             <div v-else>
               <small class="text-nowrap" data-bs-toggle="tooltip" title="Unranked"><img :src="`/images/lol/unranked.png`" height="30px"></small>
@@ -177,12 +181,14 @@ const remainMatchesToday = (total: number) => {
           </td>
           <td>
             <div class="text-decoration-underline" :class="{ 'underline-negative': remainMatchesToday(p.wins + p.losses) <= 0 }" data-bs-toggle="popover" :title="p.twitch_display" :data-bs-content="`Total jugadas: <strong>${p.wins + p.losses}</strong><br>Restantes hoy: <b ${remainMatchesToday(p.wins + p.losses) <= 0 ? 'class=\'text-negative\'' : ''}'>${remainMatchesToday(p.wins + p.losses)}</b>`">
-              <small role="button">{{ p.wins + p.losses }}</small>
+              <small role="button">
+                <strong>{{ p.wins + p.losses }}</strong>
+              </small>
             </div>
           </td>
           <td>
             <div class="d-flex flex-column align-items-center">
-              <small class="text-nowrap">
+              <small class="text-nowrap fw-bold">
                 <span class="text-positive">{{ p.wins }}</span>
                 <span class="text-muted">&nbsp;V</span>
                 <span class="text-muted">&nbsp;|&nbsp;</span>
@@ -196,7 +202,9 @@ const remainMatchesToday = (total: number) => {
             </div>
           </td>
           <td>
-            <small>{{ getPercentage(p.wins, p.losses) }}%</small>
+            <small>
+              <strong>{{ getPercentage(p.wins, p.losses) }}%</strong>
+            </small>
           </td>
         </tr>
       </tbody>
