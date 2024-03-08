@@ -15,7 +15,7 @@ a {
 }
 
 a:hover, a:hover span {
-  color: var(--bs-tertiary);
+  color: var(--bs-tertiary)!important;
   text-decoration: underline;
 }
 

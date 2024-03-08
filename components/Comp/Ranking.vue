@@ -164,7 +164,9 @@ const remainMatchesToday = (total: number) => {
             </div>
             <div v-else class="d-flex align-items-center gap-2">
               <img class="rounded-circle img-profile" :src="`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${p.lol_picture}.jpg`">
-              <a target="_blank" class="small text-nowrap" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`"><strong>{{ p.riot_name }} <span class="text-muted">#{{ p.riot_tag }}</span></strong></a>
+              <a target="_blank" class="small text-nowrap" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`">
+                <strong>{{ p.riot_name }} <span class="text-muted">#{{ p.riot_tag }}</span></strong>
+              </a>
             </div>
           </td>
           <td>
