@@ -87,7 +87,7 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
 
     bodyLines.forEach((body: string, i: number) => {
       tableHead.innerHTML += `
-      <img class="d-block mx-auto mb-2 rounded-circle" src="${context.tooltip.dataPoints[0].dataset.url}" width="60px">
+      <img class="d-block mx-auto mb-3 rounded-circle" src="${context.tooltip.dataPoints[0].dataset.url}" width="60px">
       `;
       const colors = tooltip.labelColors[i];
 
@@ -96,7 +96,7 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
       `;
 
       tableHead.innerHTML += `
-      <strong>${body}</strong>
+      <small class="fw-bold">${body}</small>
       `;
     });
 
