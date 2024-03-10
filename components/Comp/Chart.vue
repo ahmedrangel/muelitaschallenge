@@ -101,7 +101,7 @@ const chartOptions = ref({
           size: 20,
           lineHeight: 1.2
         },
-        padding: {top: 10, left: 0, right: 0, bottom: 0}
+        padding: {top: 5, left: 0, right: 0, bottom: 0}
       }
     },
     x: {
@@ -120,7 +120,7 @@ const chartOptions = ref({
           size: 20,
           lineHeight: 1.2
         },
-        padding: {top: 0, left: 0, right: 0, bottom: 10}
+        padding: {top: 0, left: 0, right: 0, bottom: 5}
       }
     }
   },
