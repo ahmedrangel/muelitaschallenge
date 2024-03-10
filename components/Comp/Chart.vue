@@ -139,7 +139,7 @@ const chartOptions = ref({
 
 <template>
   <div class="d-flex flex-wrap align-items-center mb-2 gap-2">
-    <h3 class="fw-bold mb-0">Evolución Diaria del Ranking</h3>
+    <h3 class="fw-bold mb-0">Evolución diaria del ranking</h3>
     <h6 class="mb-0 mt-1">(a partir del 3 de marzo)</h6>
   </div>
   <select v-model="selected" class="px-2 py-1" @change="addData()">
