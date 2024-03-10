@@ -87,7 +87,7 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
 
     bodyLines.forEach((body: string, i: number) => {
       tableHead.innerHTML += `
-      <img class="d-block mx-auto mb-3 rounded-circle" src="${context.tooltip.dataPoints[0].dataset.url}" width="60px">
+      <img class="d-block mx-auto mb-2 rounded-circle" src="${context.tooltip.dataPoints[0].dataset.url}" width="60px">
       `;
       const colors = tooltip.labelColors[i];
 
@@ -102,9 +102,9 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
 
     titleLines.forEach((title: string) => {
       tableHead.innerHTML += `
-      <div class="my-2">
+      <div class="my-1">
         <small class="text-nowrap">
-          <img src="/images/lol/${context.tooltip.dataPoints[0].dataset.elo[historyLabels.indexOf(title)]}.png" height="40px"> ${context.tooltip.dataPoints[0].dataset.tier[historyLabels.indexOf(title)]}
+          <img src="/images/lol/${context.tooltip.dataPoints[0].dataset.elo[historyLabels.indexOf(title)]}.png" height="36px"> ${context.tooltip.dataPoints[0].dataset.tier[historyLabels.indexOf(title)]}
         </small>
         <small class="d-block text-nowrap">
           <strong>${context.tooltip.dataPoints[0].dataset.lp[historyLabels.indexOf(title)]} LP</strong>
