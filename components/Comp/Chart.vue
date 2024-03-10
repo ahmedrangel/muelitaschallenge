@@ -24,6 +24,7 @@ for (const p of props.data as Record<string, any>[]) {
     const participant = (objeto.participants || []).find((part: Record<string, any>) => part.twitch_display === p.twitch_display);
     return participant ? participant.position : null;
   });
+
   datasets.value.push({
     label: p.twitch_display,
     fill: false,

@@ -1,6 +1,16 @@
 import history from "../content/participants-history.json";
 
-export const historyLabels = history.map(el => { return el.day + " marzo"; });
+export const historyLabels: string[] = history.map(el => { return el.day + " marzo"; });
+
+export const historyValues: (number | null)[] = history
+  .flatMap(obj => obj.participants || [])
+  .map(participant => participant.position)
+  .filter(position => position !== null)
+  .filter((value, index, self) => self.indexOf(value) === index)
+  .sort((a, b) => {
+    if (a && b) return a - b;
+    return 0;
+  });
 
 export const participantColor = {
   "Bunnita_": { color: "#ec80cf"},
@@ -49,7 +59,7 @@ const getOrCreateTooltip = (chart: any) => {
     tooltipEl.style.opacity = 1;
     tooltipEl.style.pointerEvents = "none";
     tooltipEl.style.position = "absolute";
-    tooltipEl.style.transform = "translate(-50%, 0)";
+    tooltipEl.classList.add("center");
     tooltipEl.style.transition = "all .1s ease";
 
     const element = document.createElement("div");
@@ -101,6 +111,14 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
     });
 
     titleLines.forEach((title: string) => {
+      tooltipEl.classList.remove("center", "left", "right", "bottom", "top");
+      if (context.tooltip.dataPoints[0].raw === historyValues[0] || context.tooltip.dataPoints[0].raw === historyValues[1]) tooltipEl.classList.add("bottom");
+      else if (context.tooltip.dataPoints[0].raw === historyValues[historyValues.length - 1] || context.tooltip.dataPoints[0].raw === historyValues[historyValues.length - 2]) tooltipEl.classList.add("top");
+      else tooltipEl.classList.add("center");
+      if (historyLabels.indexOf(title) === 0) tooltipEl.classList.add("right");
+      else if (historyLabels.indexOf(title) === historyLabels.length - 1) tooltipEl.classList.add("left");
+      else tooltipEl.classList.add("center");
+
       tableHead.innerHTML += `
       <div class="my-1">
         <small class="text-nowrap">

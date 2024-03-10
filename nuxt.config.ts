@@ -30,7 +30,8 @@ export default defineNuxtConfig({
     "~/assets/css/transitions.css",
     "~/assets/css/theme.css",
     "~/assets/css/tables.css",
-    "~/assets/css/popover.css"
+    "~/assets/css/popover.css",
+    "~/assets/css/chart.css"
   ],
   modules: [
     "nuxt-icon",
