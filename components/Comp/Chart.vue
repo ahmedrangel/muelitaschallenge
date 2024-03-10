@@ -81,6 +81,10 @@ const chartOptions = ref({
   elements: {
     line: {
       tension: 0.15
+    },
+    point: {
+      radius: 5,
+      hoverRadius: 12
     }
   },
   scales: {
