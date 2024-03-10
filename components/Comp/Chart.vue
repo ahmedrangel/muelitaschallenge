@@ -6,19 +6,19 @@ const props = defineProps({
   data: { type: Object, required: true },
 });
 
-const selected = ref("");
+const selected = ref("") as Ref<string | null>;
 
-const full_array = ref([]);
-const array_order = [];
+const full_array = ref([]) as Ref<string[]>;
+const array_order = [] as string[];
 
-const selected_array = ref([]);
+const selected_array = ref([]) as Ref<string[] | null>;
 
-const datasets = ref([]);
+const datasets = ref([]) as Ref<Record<string, any>[]>;
 
 for (const p of props.data as Record<string, any>[]) {
   full_array.value.push(p.twitch_display);
   array_order.push(p.twitch_display);
-  selected_array.value.push(p.twitch_display);
+  selected_array.value?.push(p.twitch_display);
   full_array.value = full_array.value.filter(el => el !== p.twitch_display);
   const data = history.map((objeto: Record<string, any>) => {
     const participant = (objeto.participants || []).find((part: Record<string, any>) => part.twitch_display === p.twitch_display);
@@ -39,7 +39,7 @@ for (const p of props.data as Record<string, any>[]) {
 const addData = () => {
   for (const p of props.data as Record<string, any>[]) {
     if (p.twitch_display === selected.value && !selected_array.value.includes(selected.value)) {
-      selected_array.value.push(selected.value);
+      selected_array.value?.push(selected.value);
       full_array.value = full_array.value.filter(el => el !== selected.value);
       const data = history.map((objeto: Record<string, any>) => {
         const participant = (objeto.participants || []).find((part: Record<string, any>) => part.twitch_display === p.twitch_display);
@@ -61,7 +61,7 @@ const addData = () => {
 
 const removeData = (name: string) => {
   datasets.value = datasets.value.filter(el => el.label !== name);
-  selected_array.value = selected_array.value.filter(el => el !== name);
+  selected_array.value = selected_array.value?.filter(el => el !== name) || null;
   selected.value = null;
   full_array.value.push(name);
   full_array.value.sort((a, b) => {

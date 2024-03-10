@@ -19,7 +19,7 @@ export const participantColor = {
   "Masorco": { color: "#248cb9" },
   "Jokerwashere69": { color: "#05c300" },
   "lolmechs": { color: "#cc6cff" }
-};
+} as Record<string, any>;
 
 export const historyData = (p: Record<string, any>) => {
   const elo = history.map(objeto => {
@@ -140,21 +140,4 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
   tooltipEl.style.top = positionY + tooltip.caretY + "px";
   tooltipEl.style.font = tooltip.options.bodyFont.string;
   tooltipEl.style.padding = tooltip.options.padding + "px " + tooltip.options.padding + "px";
-};
-
-export const getOrCreateLegendList = (chart, id) => {
-  const legendContainer = document.getElementById(id);
-  let listContainer = legendContainer.querySelector("ul");
-
-  if (!listContainer) {
-    listContainer = document.createElement("ul");
-    listContainer.style.display = "flex";
-    listContainer.style.flexDirection = "row";
-    listContainer.style.margin = 0;
-    listContainer.style.padding = 0;
-
-    legendContainer.appendChild(listContainer);
-  }
-
-  return listContainer;
 };
