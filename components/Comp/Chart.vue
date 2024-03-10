@@ -6,12 +6,12 @@ const props = defineProps({
   data: { type: Object, required: true },
 });
 
-const selected = ref("") as Ref<string | null>;
+const selected = ref("") as Ref<string>;
 
 const full_array = ref([]) as Ref<string[]>;
 const array_order = [] as string[];
 
-const selected_array = ref([]) as Ref<string[] | null>;
+const selected_array = ref([]) as Ref<string[]>;
 
 const datasets = ref([]) as Ref<Record<string, any>[]>;
 
@@ -38,7 +38,7 @@ for (const p of props.data as Record<string, any>[]) {
 
 const addData = () => {
   for (const p of props.data as Record<string, any>[]) {
-    if (p.twitch_display === selected.value && !selected_array.value.includes(selected.value)) {
+    if (p.twitch_display === selected.value && !selected_array.value?.includes(selected.value)) {
       selected_array.value?.push(selected.value);
       full_array.value = full_array.value.filter(el => el !== selected.value);
       const data = history.map((objeto: Record<string, any>) => {
@@ -62,7 +62,7 @@ const addData = () => {
 const removeData = (name: string) => {
   datasets.value = datasets.value.filter(el => el.label !== name);
   selected_array.value = selected_array.value?.filter(el => el !== name) || null;
-  selected.value = null;
+  selected.value = "";
   full_array.value.push(name);
   full_array.value.sort((a, b) => {
     return array_order.indexOf(a) - array_order.indexOf(b);
@@ -149,12 +149,12 @@ const chartOptions = ref({
     </option>
   </select>
   <div class="d-flex gap-2 my-2 flex-wrap">
-    <span v-for="(s, i) of selected_array" :key="i" role="button" class="p-2 bg-secondary d-flex align-items-center rounded user-select-none" @click="removeData(s)">
-      <img :src="datasets.filter(el => el.label == s)[0].url" width="36px" class="rounded-circle me-2">
+    <small v-for="(s, i) of selected_array" :key="i" role="button" class="p-2 bg-secondary d-flex align-items-center rounded user-select-none" @click="removeData(s)">
+      <img :src="datasets.filter(el => el.label == s)[0].url" width="32px" class="rounded-circle me-2">
       <span class="d-inline-block me-2" :style="{'border': '2px solid ' + datasets.filter(el => el.label == s)[0].borderColor}" style="width: 12px; height: 12px" />
       <span class="text-decoration-underline me-2" :style="{'text-decoration-color': datasets.filter(el => el.label == s)[0].borderColor + '!important'}" style="text-decoration-thickness: 2px!important">{{ s }}</span>
       <Icon name="ph:x-bold" class="text-muted" />
-    </span>
+    </small>
   </div>
   <ClientOnly>
     <Chart type="line" :data="lineData" :options="chartOptions" style="height: 40rem;" class="my-2 bg-secondary rounded" />
