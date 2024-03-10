@@ -58,6 +58,7 @@ const addData = () => {
       });
     }
   }
+  selected.value = "";
 };
 
 const removeData = (name: string) => {
@@ -153,9 +154,11 @@ const chartOptions = ref({
   </div>
   <select v-model="selected" class="px-2 py-1" @change="addData()">
     <option disabled value="">Agregar un participante</option>
-    <option v-for="(p, i) of full_array" :key="i">
-      {{ p }}
-    </option>
+    <template v-if="full_array">
+      <option v-for="(p, i) of full_array" :key="i" selected>
+        {{ p }}
+      </option>
+    </template>
   </select>
   <div class="d-flex gap-2 my-2 flex-wrap">
     <small v-for="(s, i) of selected_array" :key="i" role="button" class="p-2 bg-secondary d-flex align-items-center rounded user-select-none" @click="removeData(s)">
