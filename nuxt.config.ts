@@ -30,7 +30,8 @@ export default defineNuxtConfig({
     "~/assets/css/transitions.css",
     "~/assets/css/theme.css",
     "~/assets/css/tables.css",
-    "~/assets/css/popover.css"
+    "~/assets/css/popover.css",
+    "primevue/resources/themes/aura-dark-green/theme.css"
   ],
   modules: [
     "nuxt-icon",

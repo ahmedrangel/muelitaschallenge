@@ -47,5 +47,7 @@ useHead({
         <span>Los cambios de posición y partidas restantes se restauran a las 00:00 <NuxtLink to="/">hora server</NuxtLink> (GMT-6).</span>
       </div>
     </div>
+    <hr class="my-5">
+    <CompChart :data="participants" />
   </main>
 </template>
