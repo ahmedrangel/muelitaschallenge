@@ -78,6 +78,10 @@ const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
   color: "white",
+  interaction: {
+    mode: "nearest",
+    intersect: false
+  },
   elements: {
     line: {
       tension: 0.15
