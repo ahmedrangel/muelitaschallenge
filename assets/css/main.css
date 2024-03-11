@@ -15,8 +15,11 @@ a {
 }
 
 a:hover, a:hover span {
-  color: var(--bs-tertiary)!important;
   text-decoration: underline;
+}
+
+table a:hover, table a:hover span {
+  color: var(--bs-tertiary)!important;
 }
 
 .img-profile {
