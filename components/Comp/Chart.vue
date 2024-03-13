@@ -148,7 +148,7 @@ const chartOptions = ref({
 </script>
 
 <template>
-  <div id="evolucion-diaria">
+  <div id="evolucion-diaria" class="pt-3">
     <div class="d-flex flex-wrap align-items-center mb-2 gap-2">
       <h3 class="fw-bold mb-0">Evolución Diaria de la Tabla <h6 class="mb-0 mt-1 fw-light">(Datos a partir del 3 de marzo)</h6></h3>
     </div>

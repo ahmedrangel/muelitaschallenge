@@ -44,7 +44,7 @@ beforeEach(({ name }) => {
         <span class="navbar-toggler-icon" />
       </button>
       <div class="navbar-brand ms-2 ms-lg-0 me-auto d-flex align-items-center gap-1 text-decoration-none">
-        <img :src="`/${SITE.icon}`" width="30" class="me-1"><strong>{{ SITE.name }}</strong>
+        <img :src="`/${SITE.icon}`" width="40" class="me-1"><strong>{{ SITE.name }}</strong>
       </div>
       <div id="offcanvasNavbar" class="offcanvas offcanvas-start bg-secondary" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header px-4 pt-4 pb-0">
