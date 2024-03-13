@@ -148,27 +148,28 @@ const chartOptions = ref({
 </script>
 
 <template>
-  <div class="d-flex flex-wrap align-items-center mb-2 gap-2">
-    <h3 class="fw-bold mb-0">Evolución diaria del ranking</h3>
-    <h6 class="mb-0 mt-1">(a partir del 3 de marzo)</h6>
+  <div id="evolucion-diaria">
+    <div class="d-flex flex-wrap align-items-center mb-2 gap-2">
+      <h3 class="fw-bold mb-0">Evolución Diaria de la Tabla <h6 class="mb-0 mt-1 fw-light">(Datos a partir del 3 de marzo)</h6></h3>
+    </div>
+    <select v-model="selected" class="px-2 py-1" @change="addData()">
+      <option disabled value="">Agregar un participante</option>
+      <template v-if="full_array">
+        <option v-for="(p, i) of full_array" :key="i" selected>
+          {{ p }}
+        </option>
+      </template>
+    </select>
+    <div class="d-flex gap-2 my-2 flex-wrap">
+      <small v-for="(s, i) of selected_array" :key="i" role="button" class="p-2 bg-secondary d-flex align-items-center rounded user-select-none" @click="removeData(s)">
+        <img :src="datasets.filter(el => el.label == s)[0].url" width="32px" class="rounded-circle me-2">
+        <span class="d-inline-block me-2" :style="{'border': '2px solid ' + datasets.filter(el => el.label == s)[0].borderColor}" style="width: 12px; height: 12px" />
+        <span class="text-decoration-underline me-2" :style="{'text-decoration-color': datasets.filter(el => el.label == s)[0].borderColor + '!important'}" style="text-decoration-thickness: 2px!important">{{ s }}</span>
+        <Icon name="ph:x-bold" class="text-muted" />
+      </small>
+    </div>
+    <ClientOnly>
+      <Chart type="line" :data="lineData" :options="chartOptions" style="height: 40rem;" class="my-2 bg-secondary rounded" />
+    </ClientOnly>
   </div>
-  <select v-model="selected" class="px-2 py-1" @change="addData()">
-    <option disabled value="">Agregar un participante</option>
-    <template v-if="full_array">
-      <option v-for="(p, i) of full_array" :key="i" selected>
-        {{ p }}
-      </option>
-    </template>
-  </select>
-  <div class="d-flex gap-2 my-2 flex-wrap">
-    <small v-for="(s, i) of selected_array" :key="i" role="button" class="p-2 bg-secondary d-flex align-items-center rounded user-select-none" @click="removeData(s)">
-      <img :src="datasets.filter(el => el.label == s)[0].url" width="32px" class="rounded-circle me-2">
-      <span class="d-inline-block me-2" :style="{'border': '2px solid ' + datasets.filter(el => el.label == s)[0].borderColor}" style="width: 12px; height: 12px" />
-      <span class="text-decoration-underline me-2" :style="{'text-decoration-color': datasets.filter(el => el.label == s)[0].borderColor + '!important'}" style="text-decoration-thickness: 2px!important">{{ s }}</span>
-      <Icon name="ph:x-bold" class="text-muted" />
-    </small>
-  </div>
-  <ClientOnly>
-    <Chart type="line" :data="lineData" :options="chartOptions" style="height: 40rem;" class="my-2 bg-secondary rounded" />
-  </ClientOnly>
 </template>

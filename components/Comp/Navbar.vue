@@ -6,6 +6,13 @@ const tabs: Record<string, any> = [
     type: "link",
     route: "/",
     icon: "fa6-solid:trophy"
+  },
+  {
+    id: "evolucion",
+    name: "Evolución Diaria",
+    type: "id",
+    route: "/#evolucion-diaria",
+    icon: "fa6-solid:chart-line"
   },/*
   {
     id: "premios",
@@ -37,7 +44,7 @@ beforeEach(({ name }) => {
         <span class="navbar-toggler-icon" />
       </button>
       <div class="navbar-brand ms-2 ms-lg-0 me-auto d-flex align-items-center gap-1 text-decoration-none">
-        <img :src="`/${SITE.icon}`" width="40" class="me-1"><strong>{{ SITE.name }}</strong>
+        <img :src="`/${SITE.icon}`" width="30" class="me-1"><strong>{{ SITE.name }}</strong>
       </div>
       <div id="offcanvasNavbar" class="offcanvas offcanvas-start bg-secondary" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header px-4 pt-4 pb-0">
@@ -48,10 +55,14 @@ beforeEach(({ name }) => {
           <ul class="navbar-nav justify-content-end flex-grow-1 gap-1 fw-bold">
             <template v-for="(tab, i) of tabs" :key="i">
               <li class="nav-item px-1" data-bs-dismiss="offcanvas">
-                <NuxtLink class="nav-link d-flex align-items-center gap-1 position-relative overflow-hidden rounded px-3" aria-current="page" :to="tab.route">
+                <NuxtLink v-if="tab.type === 'link'" class="nav-link d-flex align-items-center gap-1 position-relative overflow-hidden rounded px-3" aria-current="page" :to="tab.route">
                   <Icon :name="tab.icon" />
                   <span>{{ tab.name }}</span>
                 </NuxtLink>
+                <a v-else class="nav-link d-flex align-items-center gap-1 position-relative overflow-hidden rounded px-3 text-white" :href="tab.route">
+                  <Icon :name="tab.icon" />
+                  <span>{{ tab.name }}</span>
+                </a>
               </li>
             </template>
           </ul>
