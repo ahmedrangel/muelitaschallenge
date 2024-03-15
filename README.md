@@ -1,4 +1,4 @@
-# SoloQ Ranking Ladder for Challenges
+# Muelitas SoloQ Challenge Ranking
 
 ## Screenshots
 ![soloqchallenge1](https://github.com/ahmedrangel/soloqchallenge/assets/50090595/7568d2b2-299f-4017-8054-b456404b7237)
