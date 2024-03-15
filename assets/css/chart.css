@@ -33,3 +33,11 @@
 .p-chart .bottom.right {
   transform: translate(0%, 0%);
 }
+
+.history-badge:hover {
+  background-color: var(--bs-primary)!important;
+}
+
+.history-badge:hover .remove-participant {
+  color: var(--negative)!important;
+}

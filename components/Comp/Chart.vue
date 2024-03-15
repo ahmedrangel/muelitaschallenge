@@ -149,8 +149,9 @@ const chartOptions = ref({
 
 <template>
   <div id="evolucion-diaria" class="pt-3">
-    <div class="d-flex flex-wrap align-items-center mb-2 gap-2">
-      <h3 class="fw-bold mb-0">Evolución Diaria de la Tabla <h6 class="mb-0 mt-1 fw-light">(Datos a partir del 3 de marzo)</h6></h3>
+    <div class="fw-bold mb-0 h3 d-flex flex-wrap align-items-center mb-2 gap-2">
+      <span>Evolución Diaria de la Tabla </span>
+      <h6 class="mb-0 mt-1 fw-light">(Datos a partir del 3 de marzo)</h6>
     </div>
     <select v-model="selected" class="px-2 py-1" @change="addData()">
       <option disabled value="">Agregar un participante</option>
@@ -161,15 +162,13 @@ const chartOptions = ref({
       </template>
     </select>
     <div class="d-flex gap-2 my-2 flex-wrap">
-      <small v-for="(s, i) of selected_array" :key="i" role="button" class="p-2 bg-secondary d-flex align-items-center rounded user-select-none" @click="removeData(s)">
+      <small v-for="(s, i) of selected_array" :key="i" role="button" class="history-badge p-2 bg-secondary d-flex align-items-center rounded user-select-none" @click="removeData(s)">
         <img :src="datasets.filter(el => el.label == s)[0].url" width="32px" class="rounded-circle me-2">
         <span class="d-inline-block me-2" :style="{'border': '2px solid ' + datasets.filter(el => el.label == s)[0].borderColor}" style="width: 12px; height: 12px" />
         <span class="text-decoration-underline me-2" :style="{'text-decoration-color': datasets.filter(el => el.label == s)[0].borderColor + '!important'}" style="text-decoration-thickness: 2px!important">{{ s }}</span>
-        <Icon name="ph:x-bold" class="text-muted" />
+        <Icon name="ph:x-bold" class="text-muted remove-participant" />
       </small>
     </div>
-    <ClientOnly>
-      <Chart type="line" :data="lineData" :options="chartOptions" style="height: 40rem;" class="my-2 bg-secondary rounded" />
-    </ClientOnly>
+    <Chart type="line" :data="lineData" :options="chartOptions" style="height: 40rem;" class="my-2 bg-secondary rounded" />
   </div>
 </template>
