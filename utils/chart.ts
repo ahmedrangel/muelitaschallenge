@@ -131,7 +131,7 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
       `;
 
       tableHead.innerHTML += `
-      <h6 class="text-muted mb-0 fw-bold">${title}</h6>
+      <h6 class="mb-0 fw-bold">${title}</h6>
       `;
     });
 
