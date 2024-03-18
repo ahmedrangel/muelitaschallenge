@@ -27,7 +27,7 @@
     "@nuxtjs/sitemap": "^5.1.2",
     "@types/bootstrap": "^5.2.10",
     "eslint": "^8.57.0",
-    "nuxt": "^3.10.3",
+    "nuxt": "^3.11.0",
     "nuxt-icon": "^0.6.9",
     "stylelint-config-standard": "^36.0.0"
   },
@@ -35,6 +35,6 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.2",
-    "primevue": "^3.49.1"
+    "primevue": "^3.50.0"
   }
 }
