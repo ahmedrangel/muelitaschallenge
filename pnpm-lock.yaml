@@ -32,7 +32,7 @@ devDependencies:
     specifier: ^8.57.0
     version: 8.57.0
   nuxt:
-    specifier: ^3.11.1
+    specifier: ^3.10.3
     version: 3.11.1(eslint@8.57.0)(stylelint@16.1.0)(typescript@5.2.2)(vite@5.1.6)
   nuxt-icon:
     specifier: ^0.6.9
