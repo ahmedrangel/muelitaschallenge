@@ -107,8 +107,8 @@ const chartOptions = ref({
         text: "Posición",
         color: "white",
         font: {
-          size: 20,
-          lineHeight: 1.2
+          size: 18,
+          lineHeight: 1
         },
         padding: {top: 5, left: 0, right: 0, bottom: 0}
       }
@@ -126,8 +126,8 @@ const chartOptions = ref({
         text: "Día",
         color: "white",
         font: {
-          size: 20,
-          lineHeight: 1.2
+          size: 18,
+          lineHeight: 1
         },
         padding: {top: 0, left: 0, right: 0, bottom: 5}
       }
