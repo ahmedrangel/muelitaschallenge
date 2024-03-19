@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Chart from "primevue/chart";
-import history from "../content/participants-history.json";
+import history from "~/content/participants-history.json";
 
 const props = defineProps({
   data: { type: Object, required: true },
