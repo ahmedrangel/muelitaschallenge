@@ -97,7 +97,7 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
 
     bodyLines.forEach((body: string, i: number) => {
       tableHead.innerHTML += `
-      <img class="d-block mx-auto mb-2 rounded-circle" src="${context.tooltip.dataPoints[0].dataset.url}" width="60px">
+      <img class="d-block mx-auto mb-2 rounded-circle" src="${context.tooltip.dataPoints[0].dataset.url}" width="50px">
       `;
       const colors = tooltip.labelColors[i];
 
@@ -115,8 +115,8 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
       if (context.tooltip.dataPoints[0].raw === historyValues[0] || context.tooltip.dataPoints[0].raw === historyValues[1]) tooltipEl.classList.add("bottom");
       else if (context.tooltip.dataPoints[0].raw === historyValues[historyValues.length - 1] || context.tooltip.dataPoints[0].raw === historyValues[historyValues.length - 2]) tooltipEl.classList.add("top");
       else tooltipEl.classList.add("center");
-      if (historyLabels.indexOf(title) === 0) tooltipEl.classList.add("right");
-      else if (historyLabels.indexOf(title) === historyLabels.length - 1) tooltipEl.classList.add("left");
+      if (historyLabels.indexOf(title) === 0 || historyLabels.indexOf(title) === 1) tooltipEl.classList.add("right");
+      else if (historyLabels.indexOf(title) === historyLabels.length - 1 || historyLabels.indexOf(title) === historyLabels.length - 2) tooltipEl.classList.add("left");
       else tooltipEl.classList.add("center");
 
       tableHead.innerHTML += `
@@ -124,14 +124,14 @@ export const externalTooltipHandler = (context: Record<string, any>) => {
         <small class="text-nowrap">
           <img src="/images/lol/${context.tooltip.dataPoints[0].dataset.elo[historyLabels.indexOf(title)]}.png" height="36px"> ${context.tooltip.dataPoints[0].dataset.tier[historyLabels.indexOf(title)]}
         </small>
-        <small class="d-block text-nowrap">
+        <small class="d-block text-nowrap fw-bold">
           <strong>${context.tooltip.dataPoints[0].dataset.lp[historyLabels.indexOf(title)]} LP</strong>
         </small>
       </div>
       `;
 
       tableHead.innerHTML += `
-      <h6 class="mb-0 fw-bold">${title}</h6>
+      <small class="mb-0 fw-bold">${title}</small>
       `;
     });
 

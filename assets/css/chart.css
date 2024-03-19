@@ -41,3 +41,9 @@
 .history-badge:hover .remove-participant {
   color: var(--negative)!important;
 }
+
+@media only screen and (width <= 767px) {
+  .chartjs-tooltip {
+    font-size: 16px;
+  }
+}
