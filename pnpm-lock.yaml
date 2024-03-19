@@ -15,7 +15,7 @@ dependencies:
     specifier: ^4.4.2
     version: 4.4.2
   primevue:
-    specifier: ^3.50.0
+    specifier: ^3.49.1
     version: 3.50.0(vue@3.4.21)
 
 devDependencies:
@@ -32,7 +32,7 @@ devDependencies:
     specifier: ^8.57.0
     version: 8.57.0
   nuxt:
-    specifier: ^3.10.3
+    specifier: ^3.11.1
     version: 3.11.1(eslint@8.57.0)(stylelint@16.1.0)(typescript@5.2.2)(vite@5.1.6)
   nuxt-icon:
     specifier: ^0.6.9
