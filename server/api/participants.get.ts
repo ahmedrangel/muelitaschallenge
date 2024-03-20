@@ -18,7 +18,7 @@ export default defineEventHandler(async () => {
     return a.position - b.position;
   });
 
-  const banned = [] as string[];
+  const banned = ["angar"] as string[];
   let i = 0;
   for (const participant of sorted) {
     participant.raw_position = ++i;
