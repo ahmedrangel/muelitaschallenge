@@ -163,7 +163,7 @@ const remainMatchesToday = (total: number) => {
               <img class="rounded-circle img-profile" :src="`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${p.lol_picture}.jpg`">
               <a target="_blank" class="small text-nowrap" :href="`https://op.gg/summoners/lan/${p.riot_name}-${p.riot_tag}`">
                 <strong>{{ p.riot_name }} <span class="text-muted">#{{ p.riot_tag }}</span></strong>
-              </a><i v-if="p.is_banned" class="small">(ya no cuenta)</i>
+              </a><i v-if="p.is_banned" class="small text-nowrap">(ya no cuenta)</i>
             </div>
           </td>
           <td>
