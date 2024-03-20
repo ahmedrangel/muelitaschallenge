@@ -106,3 +106,7 @@ main ::-webkit-scrollbar-track {
   text-decoration-thickness: 2px!important;
   text-underline-offset: 5px!important;
 }
+
+.is-banned td, .is-banned th {
+  background-color: #2c2c2c;
+}
