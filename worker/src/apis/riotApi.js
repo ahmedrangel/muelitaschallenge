@@ -82,8 +82,8 @@ export const eloValues = {
   "DIAMOND II": 27,
   "DIAMOND I": 28,
   "MASTER I": 29,
-  "GRANDMASTER I": 30,
-  "CHALLENGER I": 31
+  "GRANDMASTER I": 29,
+  "CHALLENGER I": 29
 };
 
 export default riotApi;
