@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import history from "~/content/participants-history.json";
 
-const props = defineProps({
-  data: { type: Object, required: true },
-});
-
 const selected = ref("") as Ref<string>;
 
 const full_array = ref([]) as Ref<string[]>;
@@ -14,7 +10,19 @@ const selected_array = ref([]) as Ref<string[]>;
 
 const datasets = ref([]) as Ref<Record<string, any>[]>;
 
-for (const p of props.data as Record<string, any>[]) {
+const full_participants = {} as Record<string, any>[];
+
+for (const item of history) {
+  for (const p of item.participants as Record<string, any>[]) {
+    if (!full_participants[p.twitch_display] || item.day > full_participants[p.twitch_display].day) {
+      full_participants[p.twitch_display] = { day: item.day, ...p };
+    }
+  }
+}
+
+const unique_participants = Object.entries(full_participants).map(([twitch_display, info]) => ({ twitch_display, ...info }));
+
+for (const p of unique_participants as Record<string, any>[]) {
   full_array.value.push(p.twitch_display);
   array_order.push(p.twitch_display);
   selected_array.value?.push(p.twitch_display);
@@ -37,7 +45,7 @@ for (const p of props.data as Record<string, any>[]) {
 }
 
 const addData = () => {
-  for (const p of props.data as Record<string, any>[]) {
+  for (const p of unique_participants as Record<string, any>[]) {
     if (p.twitch_display === selected.value && !selected_array.value?.includes(selected.value)) {
       selected_array.value?.push(selected.value);
       full_array.value = full_array.value.filter(el => el !== selected.value);

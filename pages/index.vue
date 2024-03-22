@@ -25,8 +25,6 @@ useHead({
     { rel: "canonical", href: SITE.host }
   ]
 });
-
-import history from "~/content/participants-history.json";
 </script>
 
 <template>
@@ -50,6 +48,6 @@ import history from "~/content/participants-history.json";
       </div>
     </div>
     <hr class="mt-5 mb-4">
-    <CompChart :data="history[0].participants" />
+    <CompChart />
   </main>
 </template>
