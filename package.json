@@ -28,7 +28,7 @@
     "@types/bootstrap": "^5.2.10",
     "eslint": "^8.57.0",
     "nuxt": "^3.11.1",
-    "nuxt-icon": "^0.6.9",
+    "nuxt-icon": "^0.6.10",
     "stylelint-config-standard": "^36.0.0"
   },
   "dependencies": {
