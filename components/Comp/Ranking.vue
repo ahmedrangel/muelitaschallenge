@@ -95,8 +95,8 @@ const remainMatchesToday = (total: number) => {
   const daysPassed = Math.floor((Number(nowInCDMX) - Number(date_init)) / (1000 * 3600 * 24)) + 1; // Calcular días pasados desde la fecha inicial
   const totalAvailableMatches = daysPassed * matches_per_day; // Calcular el total de matches disponibles hasta hoy
   const remainingMatches = totalAvailableMatches - total; // Calcular los matches que quedan hoy
-  if (Number(nowInCDMX.getMonth()) + 1 !== 3) return 0;
-  return (Number(nowInCDMX.getDate()) === 31 || Number(nowInCDMX.getDate()) === 30) && Number(nowInCDMX.getMonth()) + 1 === 3 ? remainingMatches + 9800 : remainingMatches;
+  if (Number(nowInCDMX.getMonth()) + 1 !== 3) return 0 as number;
+  return (Number(nowInCDMX.getDate()) === 31 || Number(nowInCDMX.getDate()) === 30) && Number(nowInCDMX.getMonth()) + 1 === 3 ? "∞" : remainingMatches;
 };
 </script>
 
@@ -178,7 +178,7 @@ const remainMatchesToday = (total: number) => {
             </div>
           </td>
           <td>
-            <div class="text-decoration-underline" :class="{ 'underline-negative': remainMatchesToday(p.wins + p.losses) <= 0 }" data-bs-toggle="popover" :title="p.twitch_display" :data-bs-content="`Total jugadas: <strong>${p.wins + p.losses}</strong><br>Restantes hoy: <b ${remainMatchesToday(p.wins + p.losses) <= 0 ? 'class=\'text-negative\'' : ''}'>${remainMatchesToday(p.wins + p.losses)}</b>`">
+            <div class="text-decoration-underline" :class="{ 'underline-negative': Number(remainMatchesToday(p.wins + p.losses)) <= 0 }" data-bs-toggle="popover" :title="p.twitch_display" :data-bs-content="`Total jugadas: <strong>${p.wins + p.losses}</strong><br>Restantes hoy: <b ${Number(remainMatchesToday(p.wins + p.losses)) <= 0 ? 'class=\'text-negative\'' : ''}'>${remainMatchesToday(p.wins + p.losses)}</b>`">
               <small role="button">
                 <strong>{{ p.wins + p.losses }}</strong>
               </small>
