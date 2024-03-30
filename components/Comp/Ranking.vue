@@ -96,7 +96,7 @@ const remainMatchesToday = (total: number) => {
   const totalAvailableMatches = daysPassed * matches_per_day; // Calcular el total de matches disponibles hasta hoy
   const remainingMatches = totalAvailableMatches - total; // Calcular los matches que quedan hoy
   if (Number(nowInCDMX.getMonth()) + 1 !== 3) return 0;
-  return (Number(nowInCDMX.getDate()) === 31 || Number(nowInCDMX.getDate()) === 30) && Number(nowInCDMX.getMonth()) + 1 === 3 ? 999 : remainingMatches;
+  return (Number(nowInCDMX.getDate()) === 31 || Number(nowInCDMX.getDate()) === 30) && Number(nowInCDMX.getMonth()) + 1 === 3 ? remainingMatches + 9800 : remainingMatches;
 };
 </script>
 
