@@ -143,7 +143,12 @@ const remainMatchesToday = (total: number) => {
           </td>
           <td class="text-start">
             <div class="d-flex align-items-center gap-2 px-1">
-              <img class="rounded-circle img-profile" :src="`https://static-cdn.jtvnw.net/${p.twitch_picture.replace('300x300', '70x70')}`">
+              <div class="position-relative">
+                <img class="rounded-circle img-profile" :src="`https://static-cdn.jtvnw.net/${p.twitch_picture.replace('300x300', '70x70')}`">
+                <Icon v-if="p.position === 1" class="position-absolute top-0 start-50 translate-middle crown-1" name="ph:crown-fill" />
+                <Icon v-if="p.position === 2" class="position-absolute top-0 start-50 translate-middle crown-2" name="ph:crown-fill" />
+                <Icon v-if="p.position === 3" class="position-absolute top-0 start-50 translate-middle crown-3" name="ph:crown-fill" />
+              </div>
               <a target="_blank" class="small" :href="`https://twitch.tv/${p.twitch_login}`">{{ p.twitch_display }}</a>
             </div>
           </td>

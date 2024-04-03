@@ -110,3 +110,20 @@ main ::-webkit-scrollbar-track {
 .is-banned td, .is-banned th {
   background-color: #2c2c2c;
 }
+
+
+.crown-1, .crown-2, .crown-3 {
+  font-size: 24px;
+}
+
+.crown-1 {
+  color: #ffea00;
+}
+
+.crown-2 {
+  color: #e1e1e1;
+}
+
+.crown-3 {
+  color: #ff4d00;
+}
